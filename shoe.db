@@ -1,0 +1,48 @@
+CREATE TABLE Customer (
+    CustomerId INT PRIMARY KEY AUTOINCREMENT,
+    PhoneNumber INT NOT NULL,
+    Email NVARCHAR(25) NOT NULL, 
+    AddressStreet NVARCHAR(15) NOT NULL, --composite attribute?(address)
+    AddressCity NVARCHAR(10) NOT NULL, 
+    AddressState NVARCHAR(10) NOT NULL, 
+    AddressZip INT NOT NULL, 
+    FirstName NVARCHAR(10) NOT NULL, --composite attribute?(name)
+    LastName NVARCHAR(10) NOT NULL
+);
+
+CREATE TABLE Model (
+    ModelId INT PRIMARY KEY AUTOINCREMENT,
+    Price NUMERIC(8,2) NOT NULL, 
+    Gender NVARCHAR(10) NOT NULL, --set valued?
+    ShoeType NVARCHAR(10) NOT NULL,
+    ModelName NVARCHAR(15) NOT NULL, 
+    Color NVARCHAR(10) NOT NULL --set valued?
+);
+
+CREATE TABLE Brand (
+    BrandId INT PRIMARY KEY AUTOINCREMENT,
+    YearEstablished INT NOT NULL, 
+    AddressStreet NVARCHAR(15) NOT NULL, --composite attribute?(address)
+    AddressCity NVARCHAR(10) NOT NULL, 
+    AddressState NVARCHAR(10) NOT NULL, 
+    AddressZip INT NOT NULL, 
+    Name NVARCHAR(10) NOT NULL
+);
+
+CREATE TABLE Buys (
+    PaymentType NVARCHAR(10) NOT NULL, --set valued?
+    ReceiptNumber INT NOT NULL, 
+    Price FLOAT NOT NULL, 
+    Quantity INT NOT NULL, 
+    Gender NVARCHAR(10) NOT NULL, 
+    Size NUMERIC(8,2) NOT NULL, 
+    Color NVARHCAR(10) NOT NULL
+    CONSTRAINT fk_customer_id FOREIGN KEY (CustomerId) REFERENCES Customer(CustomerId), 
+    CONSTRAINT fk_model_id FOREIGN KEY (ModelId) REFERENCES Model(ModelId)
+);
+
+CREATE TABLE Makes (
+    ReleaseDate NVARCHAR(10) NOT NULL, 
+    CONSTRAINT fk_brand_id FOREIGN KEY (Brand) REFERENCES Brand(BrandId),
+    CONSTRAINT fk_model_id FOREIGN KEY (Model) REFERENCES Model(ModelId)
+);
