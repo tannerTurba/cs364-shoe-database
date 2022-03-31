@@ -2,10 +2,10 @@ CREATE TABLE Customer (
     CustomerId INT PRIMARY KEY AUTOINCREMENT,
     PhoneNumber INT NOT NULL,
     Email NVARCHAR(25) NOT NULL, 
-    AddressStreet NVARCHAR(15) NOT NULL, --composite attribute?(address)
-    AddressCity NVARCHAR(10) NOT NULL, 
-    AddressState NVARCHAR(10) NOT NULL, 
-    AddressZip INT NOT NULL, 
+    StreetAddress NVARCHAR(15) NOT NULL, --composite attribute?(address)
+    CityAddress NVARCHAR(10) NOT NULL, 
+    StateAddress NVARCHAR(10) NOT NULL, 
+    ZipAddress INT NOT NULL, 
     FirstName NVARCHAR(10) NOT NULL, --composite attribute?(name)
     LastName NVARCHAR(10) NOT NULL
 );
