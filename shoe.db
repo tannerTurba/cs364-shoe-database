@@ -11,12 +11,13 @@ CREATE TABLE Customer (
 );
 
 CREATE TABLE Model (
-    ModelId INT PRIMARY KEY AUTOINCREMENT,
+    ModelId NVARCHAR(30) PRIMARY KEY NOT NULL,
+    StyleId NVARCHAR(10) NOT NULL,
     Price NUMERIC(8,2) NOT NULL, 
-    Gender NVARCHAR(10) NOT NULL, --set valued?
     ShoeType NVARCHAR(10) NOT NULL,
     ModelName NVARCHAR(15) NOT NULL, 
-    Color NVARCHAR(10) NOT NULL --set valued?
+    Color NVARCHAR(10) NOT NULL,
+    Thumbnail NVARCHAR(190)
 );
 
 CREATE TABLE Brand (
