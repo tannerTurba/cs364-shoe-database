@@ -23,7 +23,7 @@ CREATE TABLE Model (
 CREATE TABLE Brand (
     BrandId INT PRIMARY KEY AUTOINCREMENT,
     YearEstablished INT NOT NULL, 
-    AddressStreet NVARCHAR(15) NOT NULL, --composite attribute?(address)
+    AddressStreet NVARCHAR(15) NOT NULL, --composite attribute?(address) Yes
     AddressCity NVARCHAR(10) NOT NULL, 
     AddressState NVARCHAR(10) NOT NULL, 
     AddressZip INT NOT NULL, 
@@ -31,7 +31,7 @@ CREATE TABLE Brand (
 );
 
 CREATE TABLE Buys (
-    PaymentType NVARCHAR(10) NOT NULL, --set valued?
+    PaymentType NVARCHAR(10) NOT NULL, --set valued? No, only one payment type
     ReceiptNumber INT NOT NULL, 
     Price FLOAT NOT NULL, 
     Quantity INT NOT NULL, 
