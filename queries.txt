@@ -1,0 +1,43 @@
+Group 1 - aggregate functions, LIKE, GROUP BY, ORDER BY, LIMIT.
+    List the names of brands who have 100 or more purchases of the shoe type ‘Sneaker.’
+    List the top 5 brands that have the highest revenue.
+Group 2 - HAVING, OFFSET, outer join, joining four or more tables.
+    Which brands does the third most purchasing customer own 
+    List the brand and name of the type of shoe that was the most purchased
+Group 3 - subqueries, IN, set operators, any additional functionality outside of what we discussed in class.
+    Which shoes are more expensive than the least expensive shoe made by ‘Gucci’ 
+    Does ‘NewBalance’ have a shoe sold in the top 20 most sold pairs of shoes
+
+
+List the names of brands who have 100 or more purchases of the shoe type ‘Sneaker.’
+
+SELECT Brand.Name 
+    FROM Brand 
+    GROUP BY Brand.Name
+    HAVING 100 < (SELECT count(*)
+                    FROM Model JOIN Buys
+                        ON Model.ModelId = Buys.ModelId
+                    WHERE ShoeType = 'Sneaker')
+
+List the top 5 brands that have the highest revenue.
+
+SELECT Brand.Name 
+    FROM Brand JOIN Makes JOIN Model JOIN Buys
+        ON Brand.BrandId = Makes.BrandId
+        AND Makes.ModelId = Model.ModelId
+        AND Model.ModelId = Buys.ModelId
+    GROUP BY Brand.BrandId
+    ORDER BY sum(Buys.Quantity) DESC                --We need an attribute for total cost of a purchase
+    LIMIT 5
+
+Which brands does the third most purchasing customer own 
+--change to: Who is the third most purchasing customer
+
+SELECT Brand.Name 
+    FROM Brand JOIN Makes JOIN Model JOIN Buys
+        ON Brand.BrandId = Makes.BrandId
+        AND Makes.ModelId = Model.ModelId
+        AND Model.ModelId = Buys.ModelId
+    GROUP BY Buys.CustomerId
+    ORDER BY sum(Buys.Total) DESC                   --We need an attribute for total cost of a purchase
+    LIMIT 1 OFFSET 2
