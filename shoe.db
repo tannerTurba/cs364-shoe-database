@@ -33,7 +33,7 @@ CREATE TABLE Brand (
 CREATE TABLE Buys (
     PaymentType NVARCHAR(10) NOT NULL, --set valued? No, only one payment type
     ReceiptNumber INT NOT NULL, 
-    Price FLOAT NOT NULL, 
+    TotalCost FLOAT NOT NULL, 
     Quantity INT NOT NULL, 
     Gender NVARCHAR(10) NOT NULL, 
     Size NUMERIC(8,2) NOT NULL, 

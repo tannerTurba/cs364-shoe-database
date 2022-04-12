@@ -30,8 +30,7 @@ SELECT Brand.Name
     ORDER BY sum(Buys.Quantity) DESC                --We need an attribute for total cost of a purchase
     LIMIT 5
 
-Which brands does the third most purchasing customer own 
---change to: Who is the third most purchasing customer
+Who is the third most purchasing customer
 
 SELECT Brand.Name 
     FROM Brand JOIN Makes JOIN Model JOIN Buys
