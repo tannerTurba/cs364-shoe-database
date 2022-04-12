@@ -2,21 +2,22 @@ CREATE TABLE Customer (
     CustomerId INT PRIMARY KEY AUTOINCREMENT,
     PhoneNumber INT NOT NULL,
     Email NVARCHAR(25) NOT NULL, 
-    AddressStreet NVARCHAR(15) NOT NULL, --composite attribute?(address) Yes
-    AddressCity NVARCHAR(10) NOT NULL, 
-    AddressState NVARCHAR(10) NOT NULL, 
-    AddressZip INT NOT NULL, 
-    FirstName NVARCHAR(10) NOT NULL, --composite attribute?(name) No 
+    StreetAddress NVARCHAR(15) NOT NULL, --composite attribute?(address)
+    CityAddress NVARCHAR(10) NOT NULL, 
+    StateAddress NVARCHAR(10) NOT NULL, 
+    ZipAddress INT NOT NULL, 
+    FirstName NVARCHAR(10) NOT NULL, --composite attribute?(name)
     LastName NVARCHAR(10) NOT NULL
 );
 
 CREATE TABLE Model (
-    ModelId INT PRIMARY KEY AUTOINCREMENT,
+    ModelId NVARCHAR(30) PRIMARY KEY NOT NULL,
+    StyleId NVARCHAR(10) NOT NULL,
     Price NUMERIC(8,2) NOT NULL, 
-    Gender NVARCHAR(10) NOT NULL, --set valued? No
     ShoeType NVARCHAR(10) NOT NULL,
     ModelName NVARCHAR(15) NOT NULL, 
-    Color NVARCHAR(10) NOT NULL --set valued? Yes
+    Color NVARCHAR(10) NOT NULL,
+    Thumbnail NVARCHAR(190)
 );
 
 CREATE TABLE Brand (
