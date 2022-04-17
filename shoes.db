@@ -14,7 +14,7 @@ CREATE TABLE Model (
     ModelId NVARCHAR(30) PRIMARY KEY NOT NULL,
     StyleId NVARCHAR(10) NOT NULL,
     Price NUMERIC(8,2) NOT NULL, 
-    ShoeType NVARCHAR(10) NOT NULL,
+    Silhouette NVARCHAR(10) NOT NULL,
     ModelName NVARCHAR(15) NOT NULL, 
     Color NVARCHAR(10) NOT NULL,
     Thumbnail NVARCHAR(190)
@@ -35,7 +35,6 @@ CREATE TABLE Buys (
     ReceiptNumber INT NOT NULL, 
     TotalCost FLOAT NOT NULL, 
     Quantity INT NOT NULL, 
-    Gender NVARCHAR(10) NOT NULL, 
     Size NUMERIC(8,2) NOT NULL, 
     Color NVARHCAR(10) NOT NULL
     CONSTRAINT fk_customer_id FOREIGN KEY (CustomerId) REFERENCES Customer(CustomerId), 

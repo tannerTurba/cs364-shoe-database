@@ -1,4 +1,4 @@
-package ShoeDatabase.src;
+import javax.xml.stream.events.StartDocument;
 
 public class Brand {
     private int brandId;
@@ -8,6 +8,16 @@ public class Brand {
     private String stateAddress;
     private int zipAddress;
     private String name;
+
+    public Brand(int brandId, int yearEstablished, String streetAddress, String cityAddress, String stateAddress, int zipAddress, String name) {
+        this.brandId = brandId;
+        this.yearEstablished = yearEstablished;
+        this.streetAddress = streetAddress;
+        this.cityAddress = cityAddress;
+        this.stateAddress = stateAddress;
+        this.zipAddress = zipAddress;
+        this.name = name;
+    }
 
     /**
      * @return int return the brandId
