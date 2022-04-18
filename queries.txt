@@ -1,13 +1,12 @@
 Group 1 - aggregate functions, LIKE, GROUP BY, ORDER BY, LIMIT.
-    List the names of brands who have 100 or more purchases of the shoe type ‘Sneaker.’
+    Count the Silhouettes of Nike that are of 'Air Force 1' style
     List the top 5 brands that have the highest revenue.
 Group 2 - HAVING, OFFSET, outer join, joining four or more tables.
-    Which brands does the third most purchasing customer own 
-    List the brand and name of the type of shoe that was the most purchased
+    Who is the third most purchasing customer
+    Find the brand and name of shoe that was the most purchased
 Group 3 - subqueries, IN, set operators, any additional functionality outside of what we discussed in class.
     Which shoes are more expensive than the least expensive shoe made by ‘Gucci’ 
-    Does ‘NewBalance’ have a shoe sold in the top 20 most sold pairs of shoes
-
+    Find the shoes that cost more than $1000
 
 Count the Silhouettes of Nike that are of 'Air Force 1' style
 
@@ -38,7 +37,7 @@ SELECT Customer.Name
     ORDER BY sum(Buys.TotalCost) DESC                  
     LIMIT 1 OFFSET 2
 
-List the brand and name of shoe that was the most purchased
+Find the brand and name of shoe that was the most purchased
 
 SELECT Brand.Name, ModelName
     FROM Brand JOIN Makes JOIN Model JOIN Buys
