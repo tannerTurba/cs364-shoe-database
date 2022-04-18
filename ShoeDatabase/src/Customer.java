@@ -1,17 +1,20 @@
+import java.sql.*;
+import java.util.ArrayList;
+import java.math.*;
 
 public class Customer {
     private int customerId;
-    private int phoneNumber;
+    private String phoneNumber;
     private String email;
     private String streetAddress;
     private String cityAddress;
     private String stateAddress;
     private int zipAddress;
     private String firstName;
-    private String lastName;   
+    private String lastName;  
+    private ArrayList<ShoeModel> shoeList = new ArrayList<>();
 
-    public Customer(int customerId, int phoneNumber, String email, String streetAddress, String cityAddress, String stateAddress, int zipAddress, String firstName, String lastName) {
-        this.customerId = customerId;
+    public Customer(String email, String phoneNumber, String streetAddress, String cityAddress, String stateAddress, int zipAddress, String firstName, String lastName) {
         this.phoneNumber = phoneNumber;
         this.email = email;
         this.streetAddress = streetAddress;
@@ -20,6 +23,44 @@ public class Customer {
         this.zipAddress = zipAddress;
         this.firstName = firstName;
         this.lastName = lastName;
+    }
+
+    public Boolean isInDatabase(Database db) {
+        try {
+            String query = "SELECT count(*) AS count FROM Customer WHERE Customer.FirstName = \'" + firstName + "\' AND Customer.LastName = \'" + lastName + "\'";
+            ResultSet results = db.execute(query);
+            results.next();
+            int count = results.getInt("count");
+            return count != 0;
+        } catch(SQLException e) {
+            System.out.println("Something went wrong.");
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public void pickOutShoes(Database db) {
+        int numberOfShoes = (int)(Math.random() * 100);
+
+        try {
+            String query = "SELECT * FROM Model ORDER BY RAND() LIMIT " + numberOfShoes;
+            ResultSet results = db.execute(query);
+            
+            while(results.next()) {
+                String modelId = results.getString("ModelId");
+                String name = results.getString("ModelName");
+                String silhouette = results.getString("Silhouette");
+                String styleID = results.getString("StyleId");
+                String color = results.getString("Color");
+                long price = results.getLong("Price");
+                String thumbnail = results.getString("Thumbnail");
+
+                shoeList.add(new ShoeModel(modelId, styleID, price, silhouette, name, color, thumbnail));
+            }
+        } catch(SQLException e) {
+            System.out.println("Something went wrong.");
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -37,16 +78,16 @@ public class Customer {
     }
 
     /**
-     * @return int return the phoneNumber
+     * @return String return the phoneNumber
      */
-    public int getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
     /**
      * @param phoneNumber the phoneNumber to set
      */
-    public void setPhoneNumber(int phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
@@ -146,6 +187,21 @@ public class Customer {
      */
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+
+    /**
+     * @return ArrayList<ShoeModel> return the shoeList
+     */
+    public ArrayList<ShoeModel> getShoeList() {
+        return shoeList;
+    }
+
+    /**
+     * @param shoeList the shoeList to set
+     */
+    public void setShoeList(ArrayList<ShoeModel> shoeList) {
+        this.shoeList = shoeList;
     }
 
 }

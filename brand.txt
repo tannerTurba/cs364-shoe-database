@@ -17,6 +17,7 @@ Nike
 1921
 Via Tornabuoni 73/r
 Florence
+null
 50123
 Italy
 Gucci
@@ -24,6 +25,7 @@ Gucci
 1913
 Via Fodazzaro 36
 Milan
+null
 61201
 Italy
 Prada
@@ -31,6 +33,7 @@ Prada
 1917
 40 Rue de Sevres
 Paris
+null
 75007
 France
 Balenciaga
@@ -38,22 +41,17 @@ Balenciaga
 1906
 100 Guest St
 Boston
-02135
 Massachusettes
+02135
+United States
 New Balance
-
-1989
-1400 Industries Road
-Richmond
-47374
-Indiana
-Chaco
 
 1774
 100 Wood Hollow Drive
 Novato
-94945
 California
+94945
+United States
 Birkenstock
 
 1947
@@ -61,11 +59,13 @@ Birkenstock
 Camden 
 null
 London
+England
 Doc Marten
 
 1952
 200 Domain Drive
 Stratham
-03885
 New Hampshire
+03885
+United States
 Timberland
