@@ -23,6 +23,16 @@ public class ShoeModel {
         this.releaseDate = releaseDate;
     }
 
+    public ShoeModel(String modelId, String styleID, long price, String silhouette, String name, String color, String thumbnail) {
+        this.modelId = modelId;
+        this.styleID = styleID;
+        this.price = price;
+        this.silhouette = silhouette;
+        this.name = name;
+        this.color = color;
+        this.thumbnail = thumbnail;
+    }
+
     public String toString() {
         return "modelId: " + modelId + "\nstyleId: " + styleID + "\nprice: " + price + "\nsilhouette: " + silhouette + "\nname: " + name + "\ncolor: " + color + "\nthumbnail: " + thumbnail + "\nbrand: " + brand + "\nrelease date: " + releaseDate;
     }

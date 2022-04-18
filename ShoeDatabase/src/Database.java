@@ -1,4 +1,5 @@
 import java.sql.*;
+import java.math.*;
 
 /*
  * load SQL driver(JDBE/OOBC)
@@ -38,6 +39,38 @@ public class Database {
         PreparedStatement stmt = connection.prepareStatement(query);
         ResultSet results = stmt.executeQuery();
         return results;
+    }
+
+    public void insertBuys(Customer customer, ShoeModel shoe) {
+        String sql = "INSERT INTO Buys(PaymentType, TotalCost, Quantity, Size, Color, CustomerId, ModelId) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        int size = (int)(Math.random() * 8) + 6;
+        int quantity = (int)(Math.random() * 4) + 1;
+        int ran = (int)(Math.random() * 10);
+        String paymentType = "";
+        if(ran % 2 == 0)
+            paymentType = "Credit";
+        else 
+            paymentType = "Debit";
+
+        try {
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            stmt.setString(1, paymentType);
+            stmt.setFloat(2, shoe.getPrice() * quantity);
+            stmt.setInt(3, quantity);
+            stmt.setInt(4, size);
+            if(shoe.getColor() == null)
+                stmt.setNull(5, Types.NVARCHAR);
+            else
+                stmt.setString(5, shoe.getColor());
+            stmt.setInt(6, getCustomerId(customer));
+            stmt.setString(7, shoe.getModelId());
+            if(stmt.execute())
+                System.out.println("Inserted " + shoe.getModelId() + " into Buys");
+
+        } catch(SQLException e) {
+            System.out.println("Something went wrong.");
+            e.printStackTrace();
+        }
     }
 
     public void insertMakes(ShoeModel shoe) {
@@ -128,7 +161,7 @@ public class Database {
         String sql = "INSERT INTO Customer(PhoneNumber, Email, StreetAddress, CityAddress, StateAddress, ZipAddress, FirstName, LastName) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         try {
             PreparedStatement stmt = connection.prepareStatement(sql);
-            stmt.setInt(1, customer.getPhoneNumber());
+            stmt.setString(1, customer.getPhoneNumber());
             stmt.setString(2, customer.getEmail());
             stmt.setString(3, customer.getStreetAddress());
             stmt.setString(4, customer.getCityAddress());
@@ -158,18 +191,21 @@ public class Database {
         }
     }
     
+    public int getCustomerId(Customer customer) {
+        try {
+            String query = "SELECT CustomerId FROM Customer WHERE Customer.FirstName = \'" + customer.getFirstName() + "\' AND Customer.LastName = \'" + customer.getLastName() + "\'";
+            ResultSet results = execute(query);
+            results.next();
+            return results.getInt("CustomerId");
+        } catch(SQLException e) {
+            System.out.println("Something went wrong.");
+            e.printStackTrace();
+            return -1;
+        }
+    }
+
     public ResultSet execute(String query) throws SQLException {
         PreparedStatement stmt = connection.prepareStatement(query);
         return stmt.executeQuery();
     }
-
-    // public void insertEmployee(Employee e) throws SQLException {
-    //     String sql = "INSERT INTO Employee (SSN, Salary, FistName, MiddleName, LastName) VALUES (?, ?, ?, ?, ?)";
-    //     PreparedStatement stmt = connection.prepareStatement(sql);
-    //     stmt.setString(1, e.getSsn());
-    //     stmt.setDouble(2, e.getSalary());
-    //     stmt.setString(3, e.getFirstName());
-    //     stmt.setString(4, e.getMiddleName());
-    //     stmt.setString(5, e.getLastName());
-    // }
 }

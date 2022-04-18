@@ -8,8 +8,9 @@ public class Driver {
 
     public static void main(String[] args) {
         String brands = "/Users/tannerturba/Desktop/Brands.txt";
-        String shoeModels = "/Users/tannerturba/Desktop/Ultraboost_data.txt";
-        String[] files = {brands, shoeModels};
+        String shoeModels = "/Users/tannerturba/Desktop/bal_data.txt";
+        String customers = "/Users/tannerturba/Desktop/customer_data.txt";
+        String[] files = {brands, shoeModels, customers};
         new Driver(files);
     }
 
@@ -22,28 +23,29 @@ public class Driver {
             e.printStackTrace();
         }
         
-        // ArrayList<Brand> brands = getAllBrands(files[0]);
-        insertBrandsFrom(files[0]);
-        ArrayList<ShoeModel> shoes = getAllShoes(files[1]);
-        // for(int i = 0; i < brands.size(); i++) {
-        //     Brand b = brands.get(i);
-        //     if(!b.isInDatabase(db)) {
-        //         int brandId = db.insertBrand(b);
-        //         if(brandId != -1) 
-        //             b.setBrandId(brandId);
-
-        //         System.out.println("Inserted " + b.getName());
+        // insertBrandsFrom(files[0]);
+        // ArrayList<ShoeModel> shoes = getAllShoes(files[1]);
+        // for(int i = 0; i < shoes.size(); i++) {
+        //     ShoeModel s = shoes.get(i);
+        //     if(!s.isInDatabase(db)) {
+        //         db.insertShoeModel(s);
+        //         db.insertMakes(s);
+        //         System.out.println("Inserted " + s.getName());
         //     }
         // }
-        for(int i = 0; i < shoes.size(); i++) {
-            ShoeModel s = shoes.get(i);
-            if(!s.isInDatabase(db)) {
-                db.insertShoeModel(s);
-                db.insertMakes(s);
-                System.out.println("Inserted " + s.getName());
-            }
-        }
 
+        ArrayList<Customer> customers = getAllCustomers(files[2]);
+        for(int i = 0; i < customers.size(); i++) {
+                Customer c = customers.get(i);
+                if(!c.isInDatabase(db)) {
+                    db.insertCustomer(c);
+                    c.pickOutShoes(db);
+                    ArrayList<ShoeModel> purchasedShoes = c.getShoeList();
+                    for(int j = 0; j < purchasedShoes.size(); j++) {
+                        db.insertBuys(c, purchasedShoes.get(j));
+                    }
+                }
+            }
     }
 
     private void insertShoeModelsFrom(String file) {
@@ -66,6 +68,33 @@ public class Driver {
                 System.out.println("Inserted " + b.getName());
             }
         }
+    }
+
+    private ArrayList<Customer> getAllCustomers(String file) {
+        ArrayList<Customer> customers = new ArrayList<>();
+        try {
+            FileReader in = new FileReader(file);
+            BufferedReader reader = new BufferedReader(in);
+
+            while(reader.ready()) {
+                String email = reader.readLine();
+                String phoneNumber = reader.readLine();
+                String streetAddress = reader.readLine();
+                String cityAddress = reader.readLine();
+                String stateAddress = reader.readLine();
+                int zipAddress = Integer.parseInt(reader.readLine());
+                String firstName = reader.readLine();
+                String lastName = reader.readLine();
+                reader.readLine();
+
+                Customer c = new Customer(email, phoneNumber, streetAddress, cityAddress, stateAddress, zipAddress, firstName, lastName);
+                customers.add(c);
+            } 
+            reader.close();
+        } catch(IOException e) {
+            e.printStackTrace();
+        }
+        return customers;
     }
 
     private ArrayList<Brand> getAllBrands(String file) {
