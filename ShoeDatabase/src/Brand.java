@@ -1,4 +1,4 @@
-import javax.xml.stream.events.StartDocument;
+import java.sql.*;
 
 public class Brand {
     private int brandId;
@@ -7,30 +7,31 @@ public class Brand {
     private String cityAddress;
     private String stateAddress;
     private int zipAddress;
+    private String countryAddress;
     private String name;
 
-    public Brand(int brandId, int yearEstablished, String streetAddress, String cityAddress, String stateAddress, int zipAddress, String name) {
-        this.brandId = brandId;
+    public Brand(int yearEstablished, String streetAddress, String cityAddress, String stateAddress, int zipAddress, String countryAddress, String name) {
         this.yearEstablished = yearEstablished;
         this.streetAddress = streetAddress;
         this.cityAddress = cityAddress;
         this.stateAddress = stateAddress;
         this.zipAddress = zipAddress;
+        this.countryAddress = countryAddress;
         this.name = name;
     }
 
-    /**
-     * @return int return the brandId
-     */
-    public int getBrandId() {
-        return brandId;
-    }
-
-    /**
-     * @param brandId the brandId to set
-     */
-    public void setBrandId(int brandId) {
-        this.brandId = brandId;
+    public Boolean isInDatabase(Database db) {
+        try {
+            String query = "SELECT count(*) AS count FROM Brand WHERE Brand.Name = \'" + name + "\'";
+            ResultSet results = db.execute(query);
+            results.next();
+            int count = results.getInt("count");
+            return count != 0;
+        } catch(SQLException e) {
+            System.out.println("Something went wrong.");
+            e.printStackTrace();
+            return false;
+        }
     }
 
     /**
@@ -115,6 +116,36 @@ public class Brand {
      */
     public void setName(String name) {
         this.name = name;
+    }
+
+
+    /**
+     * @return String return the countryAddress
+     */
+    public String getCountryAddress() {
+        return countryAddress;
+    }
+
+    /**
+     * @param countryAddress the countryAddress to set
+     */
+    public void setCountryAddress(String countryAddress) {
+        this.countryAddress = countryAddress;
+    }
+
+
+    /**
+     * @return int return the brandId
+     */
+    public int getBrandId() {
+        return brandId;
+    }
+
+    /**
+     * @param brandId the brandId to set
+     */
+    public void setBrandId(int brandId) {
+        this.brandId = brandId;
     }
 
 }

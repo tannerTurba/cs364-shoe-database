@@ -1,4 +1,4 @@
-import java.sql.SQLException;
+import java.sql.*;
 
 public class ShoeModel {
     private String modelId;
@@ -27,6 +27,19 @@ public class ShoeModel {
         return "modelId: " + modelId + "\nstyleId: " + styleID + "\nprice: " + price + "\nsilhouette: " + silhouette + "\nname: " + name + "\ncolor: " + color + "\nthumbnail: " + thumbnail + "\nbrand: " + brand + "\nrelease date: " + releaseDate;
     }
 
+    public Boolean isInDatabase(Database db) {
+        try {
+            String query = "SELECT count(*) AS count FROM Model WHERE Model.ModelId = \'" + modelId + "\'";
+            ResultSet results = db.execute(query);
+            results.next();
+            int count = results.getInt("count");
+            return count != 0;
+        } catch(SQLException e) {
+            System.out.println("Something went wrong.");
+            e.printStackTrace();
+            return false;
+        }
+    }
 
     /**
      * @return int return the modelId

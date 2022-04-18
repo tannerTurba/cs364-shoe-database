@@ -7,10 +7,13 @@ public class Driver {
     Database db = new Database();
 
     public static void main(String[] args) {
-        new Driver("/Users/tannerturba/Library/Mobile Documents/com~apple~CloudDocs/Documents/CS 364/sneaks/NMD_data2.txt");
+        String brands = "/Users/tannerturba/Desktop/Brands.txt";
+        String shoeModels = "/Users/tannerturba/Desktop/Ultraboost_data.txt";
+        String[] files = {brands, shoeModels};
+        new Driver(files);
     }
 
-    public Driver(String files) {
+    public Driver(String[] files) {
         try {
             db.connect();
             System.out.println("Successful connection!");
@@ -18,25 +21,77 @@ public class Driver {
             System.out.println("Something went wrong.");
             e.printStackTrace();
         }
+        
+        // ArrayList<Brand> brands = getAllBrands(files[0]);
+        insertBrandsFrom(files[0]);
+        ArrayList<ShoeModel> shoes = getAllShoes(files[1]);
+        // for(int i = 0; i < brands.size(); i++) {
+        //     Brand b = brands.get(i);
+        //     if(!b.isInDatabase(db)) {
+        //         int brandId = db.insertBrand(b);
+        //         if(brandId != -1) 
+        //             b.setBrandId(brandId);
 
-        ArrayList<ShoeModel> shoes = getAllShoes(files);
+        //         System.out.println("Inserted " + b.getName());
+        //     }
+        // }
         for(int i = 0; i < shoes.size(); i++) {
             ShoeModel s = shoes.get(i);
-            db.insertShoeModel(s);
+            if(!s.isInDatabase(db)) {
+                db.insertShoeModel(s);
+                db.insertMakes(s);
+                System.out.println("Inserted " + s.getName());
+            }
         }
-        
+
     }
 
-    public Boolean findBrand(String brand) {
-        try {
-            String query = "SELECT Brand.Name FROM Brand WHERE Brand.Name = \'" + brand + "\'";
-            ResultSet results = db.runQuery(query);
-            return results.getFetchSize() != 0 && results.getString("Name").equals(brand);
-        } catch(SQLException e) {
-            System.out.println("Something went wrong.");
-            e.printStackTrace();
-            return false;
+    private void insertShoeModelsFrom(String file) {
+        ArrayList<ShoeModel> shoes = getAllShoes(file);
+        for(int i = 0; i < shoes.size(); i++) {
+            ShoeModel s = shoes.get(i);
+            if(!s.isInDatabase(db)) {
+                db.insertShoeModel(s);
+                System.out.println("Inserted " + s.getName());
+            }
         }
+    }
+
+    private void insertBrandsFrom(String file) {
+        ArrayList<Brand> brands = getAllBrands(file);
+        for(int i = 0; i < brands.size(); i++) {
+            Brand b = brands.get(i);
+            if(!b.isInDatabase(db)) {
+                db.insertBrand(b);
+                System.out.println("Inserted " + b.getName());
+            }
+        }
+    }
+
+    private ArrayList<Brand> getAllBrands(String file) {
+        ArrayList<Brand> brands = new ArrayList<>();
+        try {
+            FileReader in = new FileReader(file);
+            BufferedReader reader = new BufferedReader(in);
+
+            while(reader.ready()) {
+                int yearEstablished = Integer.parseInt(reader.readLine());
+                String street = reader.readLine();
+                String city = reader.readLine();
+                String state = reader.readLine();
+                int zip = Integer.parseInt(reader.readLine());
+                String country = reader.readLine();
+                String name = reader.readLine();
+                reader.readLine();
+
+                Brand b = new Brand(yearEstablished, street, city, state, zip, country, name);
+                brands.add(b);
+            } 
+            reader.close();
+        } catch(IOException e) {
+            e.printStackTrace();
+        }
+        return brands;
     }
 
     private void printShoes(ArrayList<ShoeModel> shoes){
