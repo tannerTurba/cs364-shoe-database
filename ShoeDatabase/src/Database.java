@@ -1,5 +1,4 @@
 import java.sql.*;
-import java.util.Currency;
 
 /*
  * load SQL driver(JDBE/OOBC)
@@ -23,7 +22,9 @@ import java.util.Currency;
 
 public class Database {
     private Connection connection;
-    private String url = "jdbc:mysql://localhost:3306/shoes?user=root&password=Sneakers123";
+    // private String url = "jdbc:mysql://localhost:3306/shoes?user=root&password=Sneakers123";
+    private String url = "jdbc:mysql://127.0.0.1:3306/shoes?user=root&password=Sneakers123";
+
     
     public void connect() throws SQLException {
         connection = DriverManager.getConnection(url);
