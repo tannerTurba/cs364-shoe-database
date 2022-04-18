@@ -40,7 +40,7 @@ SELECT Customer.Name
 
 List the brand and name of shoe that was the most purchased
 
-SELECT Brand.Name, Model.Name
+SELECT Brand.Name, ModelName
     FROM Brand JOIN Makes JOIN Model JOIN Buys
         ON Brand.BrandId = Makes.BrandId
         AND Makes.ModelId = Model.ModelId
@@ -49,7 +49,25 @@ SELECT Brand.Name, Model.Name
                 FROM Brand JOIN Model JOIN Buys
                     ON Brand.ModelId = Model.ModelId
                     AND Model.ModelId = Buys.ModelId
-                GROUP BY Brand.Name)
-    
-    
+                GROUP BY Brand.Name) DESC
+    LIMIT 1
+
+Which shoes are more expensive than the least expensive shoe made by ‘Gucci’ 
+ 
+ SELECT ModelName, Price
+    FROM Model JOIN Brand
+        ON Brand.ModelId = Model.ModelId
+    WHERE Brand = 'Gucci'
+    ORDER BY Model.Price ASC
+    OFFSET 1
+
+
+Find the shoes that cost more than $1000
+
+SELECT Brand.Name, ModelName
+    FROM Brand JOIN Model
+        ON Brand.ModelId = Model.ModelId
+    WHERE Price > 999
+    ORDER BY Model.Price DESC
+
 
