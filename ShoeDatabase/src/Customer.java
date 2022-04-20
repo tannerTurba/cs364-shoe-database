@@ -1,6 +1,5 @@
 import java.sql.*;
 import java.util.ArrayList;
-import java.math.*;
 
 public class Customer {
     private int customerId;
