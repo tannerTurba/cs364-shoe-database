@@ -875,7 +875,7 @@ public class GUI extends javax.swing.JFrame {
     }                                       
 
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {                                          
-        // TODO add your handling code here:
+        //CUSTOMER ADD BUTTON
         
         if(txtPhone.getText().equals("") ||
                 txtEmail.getText().equals("") ||
@@ -953,7 +953,7 @@ public class GUI extends javax.swing.JFrame {
     }                                         
 
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {                                             
-        // TODO add your handling code here:
+        //CUSTOMER DELETE BUTTON
         
         if(txtCust.getText().equals("")){
             JOptionPane.showMessageDialog(this, "Please enter data in all fields");
@@ -1018,7 +1018,7 @@ public class GUI extends javax.swing.JFrame {
     }                                            
 
     private void updateButtonActionPerformed(java.awt.event.ActionEvent evt) {                                             
-        // TODO add your handling code here:
+        //CUSTOMER UPDATE BUTTON
         
          if(txtCust.getText().equals("") || txtPhone.getText().equals("") ||
                 txtEmail.getText().equals("") ||
@@ -1095,7 +1095,7 @@ public class GUI extends javax.swing.JFrame {
     }                                         
 
     private void BrandAddActionPerformed(java.awt.event.ActionEvent evt) {                                         
-        // TODO add your handling code here:
+        //BRAND ADD BUTTON
         
         if(txtYear.getText().equals("") ||
                 txtStreet2.getText().equals("") ||
@@ -1167,7 +1167,7 @@ public class GUI extends javax.swing.JFrame {
     }                                        
 
     private void brandUpdateActionPerformed(java.awt.event.ActionEvent evt) {                                            
-        // TODO add your handling code here:
+        //BRAND UPDATE BUTTON
         
         if(txtCust.getText().equals("") || txtPhone.getText().equals("") ||
                 txtEmail.getText().equals("") ||
@@ -1240,7 +1240,7 @@ public class GUI extends javax.swing.JFrame {
     }                                           
 
     private void brandDeleteActionPerformed(java.awt.event.ActionEvent evt) {                                            
-        // TODO add your handling code here:
+        //BRAND DELETE BUTTON
         
         if(txtBrand.getText().equals("")){
             JOptionPane.showMessageDialog(this, "Please enter data in BrandId");
@@ -1298,7 +1298,7 @@ public class GUI extends javax.swing.JFrame {
     }                                           
 
     private void ModelAddActionPerformed(java.awt.event.ActionEvent evt) {                                         
-        // TODO add your handling code here:
+        //MODEL ADD BUTTON
         
         if(txtModel.getText().equals("") ||
                 txtPrice.getText().equals("") ||
@@ -1363,7 +1363,7 @@ public class GUI extends javax.swing.JFrame {
     }                                        
 
     private void ModelUpdateActionPerformed(java.awt.event.ActionEvent evt) {                                            
-        // TODO add your handling code here:
+        //MODEL UPDATE BUTTON
         
         if(txtModel.getText().equals("") || 
                 txtStyle.getText().equals("") ||
@@ -1426,7 +1426,8 @@ public class GUI extends javax.swing.JFrame {
     }                                           
 
     private void ModelDeleteActionPerformed(java.awt.event.ActionEvent evt) {                                            
-        // TODO add your handling code here:
+        //MODEL DELETE BUTTON
+        
         if(txtModel.getText().equals("")){
             JOptionPane.showMessageDialog(this, "Please enter data in ModelId field");
         }
