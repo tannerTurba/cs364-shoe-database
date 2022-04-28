@@ -24,7 +24,7 @@ import java.math.*;
 public class Database {
     private Connection connection;
     // private String url = "jdbc:mysql://localhost:3306/shoes?user=root&password=Sneakers123";
-    private String url = "jdbc:mysql://127.0.0.1:3306/shoes?user=root&password=Sneakers123";
+    private String url = "jdbc:mysql://127.0.0.1:3306/shoes?user=root&password=5628";
 
     
     public void connect() throws SQLException {

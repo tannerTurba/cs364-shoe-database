@@ -1099,8 +1099,9 @@ public class GUI extends javax.swing.JFrame {
     }                                         
 
     private void BrandAddActionPerformed(java.awt.event.ActionEvent evt) {                                         
-        // TODO add your handling code here:
+        //BRAND ADD BUTTON
         
+        //check for data entry
         if(txtYear.getText().equals("") ||
                 txtStreet2.getText().equals("") ||
                 txtCity2.getText().equals("") ||
@@ -1110,13 +1111,13 @@ public class GUI extends javax.swing.JFrame {
                 txtName.getText().equals("")){
             JOptionPane.showMessageDialog(this, "Please enter data in all fields besides BrandId!");
         }
-        else{
+        else{ //Data is entered
             try{
             Connection con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/shoes?user=root&password=5628");
             
-            String insert = "INSERT INTO Brand(YearEstablished, AddressStreet, "
-                    + "AddressCity, AddressState, AddressZip, AddressCountry, Name) "
-                    + "VALUES (?, ?, ?, ?, ?, ?)";
+            String insert = "INSERT INTO Brand(YearEstablished, AddressStreet"
+                    + ", AddressCity, AddressState, AddressZip, AddressCountry, Name) "
+                    + "VALUES (?, ?, ?, ?, ?, ?, ?)";
             
             
             PreparedStatement stmt = con.prepareStatement(insert);
@@ -1124,14 +1125,14 @@ public class GUI extends javax.swing.JFrame {
             stmt.setString(2, txtStreet2.getText());
             stmt.setString(3, txtCity2.getText());
             stmt.setString(4, txtState2.getText());
-            stmt.setInt(5, Integer.valueOf(txtZip.getText()));
+            stmt.setInt(5, Integer.valueOf(txtZip2.getText()));
             stmt.setString(6, txtCountry.getText());
-            stmt.setString(5, txtName.getText());
+            stmt.setString(7, txtName.getText());
             
-            stmt.execute();
+            stmt.execute(); //Add it to Database
             
             Statement st = con.createStatement();
-            String sql = "SELECT * FROM Brand WHERE Name = \"" + txtName.getText()+ "\"";
+            String sql = "SELECT * FROM Brand WHERE Brand.Name = \"" + txtName.getText()+ "\"";
             ResultSet rs = st.executeQuery(sql);
             while(rs.next()){
                 //data will be added until finished
@@ -1140,7 +1141,7 @@ public class GUI extends javax.swing.JFrame {
                 String streetAddress = rs.getString("AddressStreet");
                 String cityAddress = rs.getString("AddressCity");
                 String stateAddress = rs.getString("AddressState");
-                String zipAddress = String.valueOf(rs.getString("AddressZip"));
+                String zipAddress = String.valueOf(rs.getInt("AddressZip"));
                 String countryAddress = rs.getString("AddressCountry");
                 String name = rs.getString("Name");
 
@@ -1153,6 +1154,7 @@ public class GUI extends javax.swing.JFrame {
             }
                 JOptionPane.showMessageDialog(this, "Added Data Successfully");
 
+                //clear data feilds
                 txtYear.setText("");
                 txtStreet2.setText("");
                 txtCity2.setText("");
@@ -1160,7 +1162,6 @@ public class GUI extends javax.swing.JFrame {
                 txtZip2.setText("");
                 txtCountry.setText("");
                 txtName.setText("");
-             
              
             }
             catch(Exception e){
@@ -1171,7 +1172,7 @@ public class GUI extends javax.swing.JFrame {
     }                                        
 
     private void brandUpdateActionPerformed(java.awt.event.ActionEvent evt) {                                            
-        // TODO add your handling code here:
+        //BRAND UPDATE BUTTON
         
         if(txtCust.getText().equals("") || txtPhone.getText().equals("") ||
                 txtEmail.getText().equals("") ||
@@ -1192,7 +1193,7 @@ public class GUI extends javax.swing.JFrame {
                     + "AddressStreet = \"" + txtStreet2.getText() + "\","
                     + "AddressCity = \"" + txtCity2.getText() + "\","
                     + "AddressState = \"" + txtState2.getText() + "\","
-                    + "AddressZip = \"" + Integer.valueOf(txtZip.getText()) + "\","
+                    + "AddressZip = \"" + Integer.valueOf(txtZip2.getText()) + "\","
                     + "CountryAddress = \"" + txtCountry.getText() + "\","
                     + "Name = \"" + txtName.getText() + "\"" 
                     + "WHERE BrandId = \"" + Integer.valueOf(txtBrand.getText()) + "\"";
@@ -1211,7 +1212,7 @@ public class GUI extends javax.swing.JFrame {
                 String streetAddress = rs.getString("AddressStreet");
                 String cityAddress = rs.getString("AddressCity");
                 String stateAddress = rs.getString("AddressState");
-                String zipAddress = String.valueOf(rs.getString("AddressZip"));
+                String zipAddress = String.valueOf(rs.getInt("AddressZip"));
                 String countryAddress = rs.getString("AddressCountry");
                 String name = rs.getString("Name");
 
@@ -1270,8 +1271,8 @@ public class GUI extends javax.swing.JFrame {
                     String yearEstablished = String.valueOf(rs.getInt("YearEstablished"));
                     String streetAddress = rs.getString("AddressStreet");
                     String cityAddress = rs.getString("AddressCity");
-                    String stateAddress = String.valueOf(rs.getString("AddressState"));
-                    String zipAddress = String.valueOf(rs.getString("AddressZip"));
+                    String stateAddress = rs.getString("AddressState");
+                    String zipAddress = String.valueOf(rs.getInt("AddressZip"));
                     String countryAddress = rs.getString("AddressCountry");
                     String name = rs.getString("Name");
 
@@ -1382,7 +1383,7 @@ public class GUI extends javax.swing.JFrame {
             try{
             Connection con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/shoes?user=root&password=5628");
             
-            String update = "UPDATE Brand SET ModelId = \"" + txtModel.getText() + "\","
+            String update = "UPDATE Model SET ModelId = \"" + txtModel.getText() + "\","
                     + "Price = \"" + Integer.valueOf(txtPrice.getText()) + "\","
                     + "Silhouette = \"" + txtSil.getText() + "\","
                     + "ModelName = \"" + txtName2.getText() + "\","
