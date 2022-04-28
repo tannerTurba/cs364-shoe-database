@@ -352,9 +352,6 @@ public class GUI extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(33, 33, 33)
-                        .addComponent(jButton2))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel11)
@@ -381,10 +378,13 @@ public class GUI extends javax.swing.JFrame {
                             .addComponent(brandDelete)
                             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addComponent(brandUpdate)
-                                .addComponent(BrandAdd)))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 568, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(57, 57, 57))
+                                .addComponent(BrandAdd))))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(45, 45, 45)
+                        .addComponent(jButton2)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 619, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -494,43 +494,45 @@ public class GUI extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(62, 62, 62)
-                        .addComponent(jButton3))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(24, 24, 24)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addComponent(jLabel21)
-                                .addGap(18, 18, 18)
-                                .addComponent(txtSil, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(24, 24, 24)
+                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel4Layout.createSequentialGroup()
+                                        .addComponent(jLabel21)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(txtSil, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel4Layout.createSequentialGroup()
+                                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel18)
+                                            .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(26, 26, 26)
+                                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(txtPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(txtStyle, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(txtModel, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel4Layout.createSequentialGroup()
+                                            .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(txtColor, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel4Layout.createSequentialGroup()
+                                            .addComponent(jLabel22)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(txtName2, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                             .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addGap(52, 52, 52)
                                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel18)
-                                    .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(26, 26, 26)
-                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtStyle, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtModel, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel4Layout.createSequentialGroup()
-                                    .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(txtColor, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel4Layout.createSequentialGroup()
-                                    .addComponent(jLabel22)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(txtName2, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(52, 52, 52)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(ModelUpdate)
-                            .addComponent(ModelAdd)
-                            .addComponent(ModelDelete))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 132, Short.MAX_VALUE)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 508, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(66, 66, 66))
+                                    .addComponent(ModelUpdate)
+                                    .addComponent(ModelAdd)
+                                    .addComponent(ModelDelete))))
+                        .addGap(18, 18, 18))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                        .addComponent(jButton3)
+                        .addGap(44, 44, 44)))
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 634, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(21, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -597,22 +599,19 @@ public class GUI extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(56, 56, 56)
+                .addGap(42, 42, 42)
                 .addComponent(jButton4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 88, Short.MAX_VALUE)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 504, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(129, 129, 129))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 69, Short.MAX_VALUE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 605, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(19, 19, 19)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(19, 19, 19)
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(53, 53, 53)
-                        .addComponent(jButton4)))
+                    .addComponent(jButton4)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(67, Short.MAX_VALUE))
         );
 
@@ -640,23 +639,20 @@ public class GUI extends javax.swing.JFrame {
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                .addGap(22, 22, 22)
+                .addGap(37, 37, 37)
                 .addComponent(jButton5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 148, Short.MAX_VALUE)
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(31, 31, 31)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 669, Short.MAX_VALUE)
                 .addGap(17, 17, 17))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGap(23, 23, 23)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGap(21, 21, 21)
-                        .addComponent(jButton5)))
-                .addContainerGap(80, Short.MAX_VALUE))
+                    .addComponent(jButton5)
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(63, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Buys", jPanel5);
@@ -1099,9 +1095,8 @@ public class GUI extends javax.swing.JFrame {
     }                                         
 
     private void BrandAddActionPerformed(java.awt.event.ActionEvent evt) {                                         
-        //BRAND ADD BUTTON
+        // TODO add your handling code here:
         
-        //check for data entry
         if(txtYear.getText().equals("") ||
                 txtStreet2.getText().equals("") ||
                 txtCity2.getText().equals("") ||
@@ -1111,13 +1106,13 @@ public class GUI extends javax.swing.JFrame {
                 txtName.getText().equals("")){
             JOptionPane.showMessageDialog(this, "Please enter data in all fields besides BrandId!");
         }
-        else{ //Data is entered
+        else{
             try{
             Connection con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/shoes?user=root&password=5628");
             
-            String insert = "INSERT INTO Brand(YearEstablished, AddressStreet"
-                    + ", AddressCity, AddressState, AddressZip, AddressCountry, Name) "
-                    + "VALUES (?, ?, ?, ?, ?, ?, ?)";
+            String insert = "INSERT INTO Brand(YearEstablished, AddressStreet, "
+                    + "AddressCity, AddressState, AddressZip, AddressCountry, Name) "
+                    + "VALUES (?, ?, ?, ?, ?, ?)";
             
             
             PreparedStatement stmt = con.prepareStatement(insert);
@@ -1127,12 +1122,12 @@ public class GUI extends javax.swing.JFrame {
             stmt.setString(4, txtState2.getText());
             stmt.setInt(5, Integer.valueOf(txtZip2.getText()));
             stmt.setString(6, txtCountry.getText());
-            stmt.setString(7, txtName.getText());
+            stmt.setString(5, txtName.getText());
             
-            stmt.execute(); //Add it to Database
+            stmt.execute();
             
             Statement st = con.createStatement();
-            String sql = "SELECT * FROM Brand WHERE Brand.Name = \"" + txtName.getText()+ "\"";
+            String sql = "SELECT * FROM Brand WHERE Name = \"" + txtName.getText()+ "\"";
             ResultSet rs = st.executeQuery(sql);
             while(rs.next()){
                 //data will be added until finished
@@ -1141,7 +1136,7 @@ public class GUI extends javax.swing.JFrame {
                 String streetAddress = rs.getString("AddressStreet");
                 String cityAddress = rs.getString("AddressCity");
                 String stateAddress = rs.getString("AddressState");
-                String zipAddress = String.valueOf(rs.getInt("AddressZip"));
+                String zipAddress = String.valueOf(rs.getString("AddressZip"));
                 String countryAddress = rs.getString("AddressCountry");
                 String name = rs.getString("Name");
 
@@ -1154,7 +1149,6 @@ public class GUI extends javax.swing.JFrame {
             }
                 JOptionPane.showMessageDialog(this, "Added Data Successfully");
 
-                //clear data feilds
                 txtYear.setText("");
                 txtStreet2.setText("");
                 txtCity2.setText("");
@@ -1162,6 +1156,7 @@ public class GUI extends javax.swing.JFrame {
                 txtZip2.setText("");
                 txtCountry.setText("");
                 txtName.setText("");
+             
              
             }
             catch(Exception e){
@@ -1172,7 +1167,7 @@ public class GUI extends javax.swing.JFrame {
     }                                        
 
     private void brandUpdateActionPerformed(java.awt.event.ActionEvent evt) {                                            
-        //BRAND UPDATE BUTTON
+        // TODO add your handling code here:
         
         if(txtCust.getText().equals("") || txtPhone.getText().equals("") ||
                 txtEmail.getText().equals("") ||
@@ -1212,7 +1207,7 @@ public class GUI extends javax.swing.JFrame {
                 String streetAddress = rs.getString("AddressStreet");
                 String cityAddress = rs.getString("AddressCity");
                 String stateAddress = rs.getString("AddressState");
-                String zipAddress = String.valueOf(rs.getInt("AddressZip"));
+                String zipAddress = String.valueOf(rs.getString("AddressZip"));
                 String countryAddress = rs.getString("AddressCountry");
                 String name = rs.getString("Name");
 
@@ -1271,8 +1266,8 @@ public class GUI extends javax.swing.JFrame {
                     String yearEstablished = String.valueOf(rs.getInt("YearEstablished"));
                     String streetAddress = rs.getString("AddressStreet");
                     String cityAddress = rs.getString("AddressCity");
-                    String stateAddress = rs.getString("AddressState");
-                    String zipAddress = String.valueOf(rs.getInt("AddressZip"));
+                    String stateAddress = String.valueOf(rs.getString("AddressState"));
+                    String zipAddress = String.valueOf(rs.getString("AddressZip"));
                     String countryAddress = rs.getString("AddressCountry");
                     String name = rs.getString("Name");
 
@@ -1318,16 +1313,15 @@ public class GUI extends javax.swing.JFrame {
             
             String insert = "INSERT INTO Model(ModelId, StyleId, Price,"
                     + " Silhouette, ModelName, Color) "
-                    + "VALUES (?, ?, ?, ?, ?, ?)";
+                    + "VALUES (?, ?, ?, ?, ?, ?, ?)";
 
             
             PreparedStatement stmt = con.prepareStatement(insert);
             stmt.setString(1, txtModel.getText());
-            stmt.setString(2, txtStyle.getText());
-            stmt.setInt(3, Integer.valueOf(txtPrice.getText()));
-            stmt.setString(4, txtSil.getText());
-            stmt.setString(5, txtName2.getText());
-            stmt.setString(6, txtColor.getText());
+            stmt.setInt(2, Integer.valueOf(txtPrice.getText()));
+            stmt.setString(3, txtSil.getText());
+            stmt.setString(4, txtName2.getText());
+            stmt.setString(5, txtColor.getText());
 
             stmt.execute();
             
@@ -1383,12 +1377,12 @@ public class GUI extends javax.swing.JFrame {
             try{
             Connection con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/shoes?user=root&password=5628");
             
-            String update = "UPDATE Model SET ModelId = \"" + txtModel.getText() + "\","
+            String update = "UPDATE Brand SET ModelId = \"" + txtModel.getText() + "\","
                     + "Price = \"" + Integer.valueOf(txtPrice.getText()) + "\","
                     + "Silhouette = \"" + txtSil.getText() + "\","
                     + "ModelName = \"" + txtName2.getText() + "\","
                     + "Color = \"" + txtColor.getText() + "\""
-                    + "WHERE StyleId = \"" + txtStyle.getText() + "\"";
+                    + "WHERE SytleId = \"" + txtStyle.getText() + "\"";
             
             PreparedStatement stmt = con.prepareStatement(update);
             
