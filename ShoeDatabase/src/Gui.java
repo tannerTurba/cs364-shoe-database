@@ -459,7 +459,7 @@ public class GUI extends javax.swing.JFrame {
         jButton3.setText("Show Model");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                populateModelTable();
             }
         });
 
@@ -745,20 +745,15 @@ public class GUI extends javax.swing.JFrame {
         catch(Exception e){
             System.out.println(e.getMessage());
         }
-    }                                        
-
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {                                         
-        // TODO add your handling code here:
-        //MODEL
+    }       
+                                     
+    //MODEL
+    private void populateModelTable() {                                    
         try{
-            //open connection
-            //Class.forName("com.mysql.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/shoes?user=root&password=Sneakers123");
-            //username is root password is Sneakers123
-            
-            Statement st = con.createStatement();
             String sql = "SELECT * FROM Model";
-            ResultSet rs = st.executeQuery(sql);
+            ResultSet rs = db.executeSQL(sql);
+            DefaultTableModel tblModel = (DefaultTableModel)Model.getModel();
+            tblModel.setRowCount(0);
             while(rs.next()){
                 //data will be added until finished
                 String modelId = rs.getString("ModelId");
@@ -770,14 +765,10 @@ public class GUI extends javax.swing.JFrame {
 
                 String tbData[] = {modelId, styleId, price,
                     silhouette, modelName, color};
-                DefaultTableModel tblModel = (DefaultTableModel)Model.getModel();
 
                 //addstring array into jtable
                 tblModel.addRow(tbData);
             }
-
-            //close connection
-            con.close();
         }
         catch(Exception e){
             System.out.println(e.getMessage());
@@ -963,24 +954,19 @@ public class GUI extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Please enter data in all fields besides BrandId!");
         }
         else{
-            try{
-                Brand newBrand = new Brand(
-                                Integer.valueOf(txtYear.getText()),
-                                txtStreet2.getText(),
-                                txtCity2.getText(),
-                                txtState2.getText(),
-                                Integer.valueOf(txtZip2.getText()),
-                                txtCountry.getText(),
-                                txtName.getText()
-                );
-                System.out.println(newBrand);
-                db.addBrand(newBrand);
-                populateBrandTable();
-                resetBrandTextBoxes();
-            }
-            catch(Exception e){
-            System.out.println(e.getMessage());                
-            }
+            Brand newBrand = new Brand(
+                            Integer.valueOf(txtYear.getText()),
+                            txtStreet2.getText(),
+                            txtCity2.getText(),
+                            txtState2.getText(),
+                            Integer.valueOf(txtZip2.getText()),
+                            txtCountry.getText(),
+                            txtName.getText()
+            );
+            System.out.println(newBrand);
+            db.addBrand(newBrand);
+            populateBrandTable();
+            resetBrandTextBoxes();
         }
     }                                        
     
@@ -997,26 +983,21 @@ public class GUI extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Please enter data in all fields");
         }
         else{            
-            try{
-                Brand brand = new Brand(
-                    Integer.valueOf(txtYear.getText()),
-                    txtStreet2.getText(),
-                    txtCity2.getText(),
-                    txtState2.getText(),
-                    Integer.valueOf(txtZip2.getText()),
-                    txtCountry.getText(),
-                    txtName.getText(),
-                    Integer.valueOf(txtBrand.getText())
-                );                
-                db.updateBrand(brand);
-                populateBrandTable();
+            Brand brand = new Brand(
+                Integer.valueOf(txtYear.getText()),
+                txtStreet2.getText(),
+                txtCity2.getText(),
+                txtState2.getText(),
+                Integer.valueOf(txtZip2.getText()),
+                txtCountry.getText(),
+                txtName.getText(),
+                Integer.valueOf(txtBrand.getText())
+            );                
+            db.updateBrand(brand);
+            populateBrandTable();
 
-                JOptionPane.showMessageDialog(this, "Updated Data Successfully");
-                resetBrandTextBoxes();
-            }
-            catch(Exception e){
-                System.out.println(e.getMessage());                
-            }
+            JOptionPane.showMessageDialog(this, "Updated Data Successfully");
+            resetBrandTextBoxes();
         }
     }            
     
@@ -1026,17 +1007,12 @@ public class GUI extends javax.swing.JFrame {
         if(txtBrand.getText().equals("")){
             JOptionPane.showMessageDialog(this, "Please enter data in BrandId");
         }
-        else{            
-            try{
-                db.deleteBrand(txtBrand.getText());
-                populateBrandTable();
-                
-                JOptionPane.showMessageDialog(this, "Deleted Data Successfully");
-                resetBrandTextBoxes();
-            }
-            catch(Exception e){
-            System.out.println(e.getMessage());                
-            }
+        else{           
+            db.deleteBrand(txtBrand.getText());
+            populateBrandTable();
+            
+            JOptionPane.showMessageDialog(this, "Deleted Data Successfully");
+            resetBrandTextBoxes();
         } 
     }
     
@@ -1051,9 +1027,19 @@ public class GUI extends javax.swing.JFrame {
         txtName.setText("");
     }
 
+    private void resetModelTextBoxes() {
+        txtModel.setText("");
+        txtStyle.setText("");
+        txtPrice.setText("");
+        txtSil.setText("");
+        txtName2.setText("");
+        txtColor.setText("");
+        txtFirst.setText("");
+        txtLast.setText("");
+    }
+
+    //MODEL ADD BUTTON
     private void ModelAddActionPerformed(java.awt.event.ActionEvent evt) {                                         
-        //MODEL ADD BUTTON
-        
         if(txtModel.getText().equals("") ||
                 txtPrice.getText().equals("") ||
                 txtSil.getText().equals("") ||
@@ -1062,63 +1048,22 @@ public class GUI extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Please enter data in all fields besides StyleId!");
         }
         else{            
-            try{
-            Connection con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/shoes?user=root&password=Sneakers123");
-            
-            String insert = "INSERT INTO Model(ModelId, StyleId, Price,"
-                    + " Silhouette, ModelName, Color) "
-                    + "VALUES (?, ?, ?, ?, ?, ?, ?)";
-
-            
-            PreparedStatement stmt = con.prepareStatement(insert);
-            stmt.setString(1, txtModel.getText());
-            stmt.setInt(2, Integer.valueOf(txtPrice.getText()));
-            stmt.setString(3, txtSil.getText());
-            stmt.setString(4, txtName2.getText());
-            stmt.setString(5, txtColor.getText());
-
-            stmt.execute();
-            
-            Statement st = con.createStatement();
-            String sql = "SELECT * FROM Model WHERE ModelId = \"" + txtModel.getText()+ "\"";
-            ResultSet rs = st.executeQuery(sql);
-            while(rs.next()){
-                //data will be added until finished
-                String modelId = rs.getString("ModelId");
-                String styleId = rs.getString("StyleId");
-                String price = String.valueOf(rs.getInt("Price"));
-                String silhouette = rs.getString("Silhouette");
-                String modelName = rs.getString("ModelName");
-                String color = rs.getString("Color");
-
-                String tbData[] = {modelId, styleId, price,
-                    silhouette, modelName, color};
-                DefaultTableModel tblModel = (DefaultTableModel)Model.getModel();
-
-                //addstring array into jtable
-                tblModel.addRow(tbData);
-            }
-                JOptionPane.showMessageDialog(this, "Added Data Successfully");
-
-                txtModel.setText("");
-                txtStyle.setText("");
-                txtPrice.setText("");
-                txtSil.setText("");
-                txtName2.setText("");
-                txtColor.setText("");
-                txtFirst.setText("");
-                txtLast.setText("");
-             
-            }
-            catch(Exception e){
-            System.out.println(e.getMessage());                
-            }
+            ShoeModel s = new ShoeModel(
+                txtModel.getText(),
+                txtStyle.getText(),
+                Integer.valueOf(txtPrice.getText()),
+                txtSil.getText(),
+                txtName2.getText(),
+                txtColor.getText()
+            );
+            db.addShoeModel(s);
+            populateModelTable();
+            resetModelTextBoxes();
         }                                    
     }                                        
 
+    //MODEL UPDATE BUTTON
     private void ModelUpdateActionPerformed(java.awt.event.ActionEvent evt) {                                            
-        //MODEL UPDATE BUTTON
-        
         if(txtModel.getText().equals("") || 
                 txtStyle.getText().equals("") ||
                 txtPrice.getText().equals("") ||

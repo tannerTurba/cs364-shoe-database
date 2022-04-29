@@ -125,6 +125,20 @@ public class Database {
         }
     }
 
+    public void addShoeModel(ShoeModel shoe) {
+        String insert = "INSERT INTO Model(ModelId, StyleId, Price," +
+                    " Silhouette, ModelName, Color) " +
+                    "VALUES (" + shoe.getModelId() + ", " + shoe.getStyleID() +
+                    ", " + shoe.getPrice() + ", " + shoe.getSilhouette() + 
+                    ", " + shoe.getName() + ", " + shoe.getColor() + ")";
+        try {
+            PreparedStatement stmt = connection.prepareStatement(insert);
+            stmt.execute();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public int insertBrand(Brand brand) {
         String sql = "INSERT INTO Brand(YearEstablished, AddressStreet, AddressCity, AddressState, AddressZip, AddressCountry, Name) VALUES (?, ?, ?, ?, ?, ?, ?)";
         int brandId = -1;
