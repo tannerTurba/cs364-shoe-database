@@ -92,6 +92,19 @@ public class Gui extends javax.swing.JFrame {
     private javax.swing.JTextField txtZip;
     private javax.swing.JTextField txtZip2;
     private javax.swing.JButton updateButton;
+    private javax.swing.JTextField q1;
+    private javax.swing.JTextField q2;
+    private javax.swing.JTextField q3;
+    private javax.swing.JTextField q4;
+    private javax.swing.JTextField q5;
+    private javax.swing.JTextField q6;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JButton buttonq1;
+    private javax.swing.JButton buttonq2;
+    private javax.swing.JButton buttonq3;
+    private javax.swing.JButton buttonq4;
+    private javax.swing.JButton buttonq5;
+    private javax.swing.JButton buttonq6;
     private Database db = new Database();
     // End of variables declaration
 
@@ -219,6 +232,21 @@ public class Gui extends javax.swing.JFrame {
         jScrollPane5 = new javax.swing.JScrollPane();
         Buys = new javax.swing.JTable();
         jButton5 = new javax.swing.JButton();
+
+        //new gui page
+        q1 = new javax.swing.JTextField();
+        q2 = new javax.swing.JTextField();
+        q3 = new javax.swing.JTextField();
+        q4 = new javax.swing.JTextField();
+        q5 = new javax.swing.JTextField();
+        q6 = new javax.swing.JTextField();
+        jPanel6 = new javax.swing.JPanel();
+        buttonq1 = new javax.swing.JButton();
+        buttonq2 = new javax.swing.JButton();
+        buttonq3 = new javax.swing.JButton();
+        buttonq4 = new javax.swing.JButton();
+        buttonq5 = new javax.swing.JButton();
+        buttonq6 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -768,7 +796,109 @@ public class Gui extends javax.swing.JFrame {
                 .addContainerGap(63, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Buys", jPanel5);
+        buttonq1.setText("Query 1");
+        buttonq1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                advancedQuery1();
+            }
+        });
+
+        buttonq2.setText("Query 2");
+        buttonq2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                advancedQuery2();
+            }
+        });
+
+        buttonq3.setText("Query 3");
+        buttonq3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                advancedQuery3();
+            }
+        });
+
+        buttonq4.setText("Query 4");
+        buttonq4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                advancedQuery4();
+            }
+        });
+
+        buttonq5.setText("Query 5");
+        buttonq5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                advancedQuery5();
+            }
+        });
+
+        buttonq6.setText("Query 6");
+        buttonq6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                advancedQuery6();
+            }
+        }); 
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(q1, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(q2, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(q3, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(q4, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(q5, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(q6, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(buttonq1)
+                        .addComponent(buttonq2)
+                        .addComponent(buttonq3)
+                        .addComponent(buttonq4)
+                        .addComponent(buttonq5)
+                        .addComponent(buttonq6))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(q1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(buttonq1))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(q2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(buttonq2))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(q3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(buttonq3))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(q4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(buttonq4))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(q5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(buttonq5))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(q6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(buttonq6))
+                        ))
+                .addContainerGap(65, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Advanced Queries", jPanel6);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -1181,5 +1311,93 @@ public class Gui extends javax.swing.JFrame {
             populateModelTable();
             resetModelTextBoxes();
         } 
-    }                                                 
+    }    
+    
+    // RUN ADVANCED QUERY 1
+    private void advancedQuery1() {
+        // Find the number of shoes that are classified by the same Silhouette
+        if(q1.getText().equals("")){
+            JOptionPane.showMessageDialog(this, "Please enter data in ModelId field");
+        }
+        else {
+            String silhouette = q1.getText();
+            ResultSet rs = db.advancedQ1(silhouette);
+            q1.setText("");
+
+            String count = "";
+            try {
+				while(rs.next()) {
+				    count = rs.getString("count");
+				}
+                JOptionPane.showMessageDialog(this, "There are " + count +
+                    " shoes that match the Silhouette \"" + silhouette + "\"");
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+        } 
+    }
+
+    // RUN ADVANCED QUERY 2
+    private void advancedQuery2() {
+        if(q2.getText().equals("")){
+            JOptionPane.showMessageDialog(this, "Please enter data in ModelId field");
+        }
+        else {
+            
+        } 
+    }
+
+    // RUN ADVANCED QUERY 3
+    private void advancedQuery3() {
+        // Find the __ most purchasing customer
+        if(q3.getText().equals("")){
+            JOptionPane.showMessageDialog(this, "Please enter data in ModelId field");
+        }
+        else {
+            int x = Integer.valueOf(q3.getText());
+            ResultSet rs = db.advancedQ3(x-1);
+            q1.setText("");
+
+            String name = "";
+            try {
+				while(rs.next()) {
+				    name += rs.getString("FirstName") + " ";
+                    name += rs.getString("LastName");
+				}
+                JOptionPane.showMessageDialog(this, name + " is the " + x + " most purchasing customer.");
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+        } 
+    }
+
+    // RUN ADVANCED QUERY 4
+    private void advancedQuery4() {
+        if(q4.getText().equals("")){
+            JOptionPane.showMessageDialog(this, "Please enter data in ModelId field");
+        }
+        else {
+            
+        } 
+    }
+
+    // RUN ADVANCED QUERY 5
+    private void advancedQuery5() {
+        if(q5.getText().equals("")){
+            JOptionPane.showMessageDialog(this, "Please enter data in ModelId field");
+        }
+        else {
+            
+        } 
+    }
+
+    // RUN ADVANCED QUERY 6
+    private void advancedQuery6() {
+        if(q6.getText().equals("")){
+            JOptionPane.showMessageDialog(this, "Please enter data in ModelId field");
+        }
+        else {
+            
+        } 
+    }
 }

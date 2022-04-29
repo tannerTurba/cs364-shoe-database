@@ -9,8 +9,9 @@ Group 3 - subqueries, IN, set operators, any additional functionality outside of
     Find the shoes that cost more than $1000
 
 Count the Silhouettes of Nike that are of 'Air Force 1' style
+Find the number of shoes that are classified by the same Silhouette??
 
-SELECT count(Silhouette) AS NumAirForces
+SELECT count(Silhouette)
     FROM Model JOIN Makes JOIN Brand
         ON Brand.BrandId = Makes.BrandId
         AND Makes.ModelId = Model.ModelId

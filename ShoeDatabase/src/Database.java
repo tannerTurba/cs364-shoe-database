@@ -27,6 +27,54 @@ public class Database {
         return results;
     }
 
+    public ResultSet advancedQ1(String s) {
+        ResultSet result = null;
+        String sql = "SELECT count(Silhouette) AS count " +
+                        "FROM Model " +
+                        "WHERE Silhouette LIKE '%" + s + "%'";
+        try {
+            result = runQuery(sql);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    public ResultSet advancedQ2(String s) {
+        return null;
+    }
+
+    public ResultSet advancedQ3(int s) {
+        ResultSet result = null;
+        String sql = "SELECT Customer.FirstName AS FirstName, Customer.LastName AS LastName " +
+                        "FROM Makes JOIN Model JOIN Buys JOIN Customer " +
+                            "ON Makes.ModelId = Model.ModelId " +
+                            "AND Model.ModelId = Buys.ModelId " +
+                            "AND Buys.CustomerId = Customer.CustomerId " +
+                        "GROUP BY Buys.CustomerId " +
+                        "ORDER BY sum(Buys.TotalCost) DESC " +                  
+                            "LIMIT 1 OFFSET " + s + "";
+        System.out.println(sql);
+        try {
+            result = runQuery(sql);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    public ResultSet advancedQ4(String s) {
+        return null;
+    }
+
+    public ResultSet advancedQ5(String s) {
+        return null;
+    }
+
+    public ResultSet advancedQ6(String s) {
+        return null;
+    }
+
     public void insertBuys(Customer customer, ShoeModel shoe) {
         String sql = "INSERT INTO Buys(PaymentType, TotalCost, Quantity, Size, Color, CustomerId, ModelId) VALUES (?, ?, ?, ?, ?, ?, ?)";
         int size = (int)(Math.random() * 8) + 6;
