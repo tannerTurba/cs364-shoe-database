@@ -27,6 +27,19 @@ public class Database {
         return results;
     }
 
+    public ResultSet advancedQ1(String s) {
+        ResultSet result = null;
+        String sql = "SELECT count(Silhouette) AS count " +
+                        "FROM Model " +
+                        "WHERE Silhouette LIKE '%" + s + "%'";
+        try {
+            result = runQuery(sql);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
     public void insertBuys(Customer customer, ShoeModel shoe) {
         String sql = "INSERT INTO Buys(PaymentType, TotalCost, Quantity, Size, Color, CustomerId, ModelId) VALUES (?, ?, ?, ?, ?, ?, ?)";
         int size = (int)(Math.random() * 8) + 6;

@@ -10,11 +10,13 @@ Group 3 - subqueries, IN, set operators, any additional functionality outside of
 
 
 Count the Silhouettes of Nike that are of 'Air Force 1' style
+Find the number of shoes that are classified by the same Silhouette??
 
 SELECT count(Silhouette)
-    FROM Model JOIN Brand
-        ON Brand.ModelId = Model.ModelId
-    WHERE Brand.Name = 'Nike' AND Silhouette LIKE '%Air Force 1&'
+    FROM Model JOIN Makes JOIN Brand
+        ON Brand.BrandId = Makes.BrandId
+        ON Makes.ModelId = Model.ModelId
+    WHERE Brand.Name = 'Nike' AND Silhouette LIKE '%Air Force 1%'
 
 List the top 5 brands that have the highest revenue.
 

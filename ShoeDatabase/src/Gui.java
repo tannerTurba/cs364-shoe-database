@@ -800,42 +800,42 @@ public class Gui extends javax.swing.JFrame {
         buttonq1.setText("Query 1");
         buttonq1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                // function here
+                advancedQuery1();
             }
         });
 
         buttonq2.setText("Query 2");
         buttonq2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                // function here
+                advancedQuery2();
             }
         });
 
         buttonq3.setText("Query 3");
         buttonq3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                // function here
+                advancedQuery3();
             }
         });
 
         buttonq4.setText("Query 4");
         buttonq4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                // function here
+                advancedQuery4();
             }
         });
 
         buttonq5.setText("Query 5");
         buttonq5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                // function here
+                advancedQuery5();
             }
         });
 
         buttonq6.setText("Query 6");
         buttonq6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                // function here
+                advancedQuery6();
             }
         }); 
 
@@ -1312,5 +1312,96 @@ public class Gui extends javax.swing.JFrame {
             populateModelTable();
             resetModelTextBoxes();
         } 
-    }                                                 
+    }    
+    
+    // RUN ADVANCED QUERY 1
+    private void advancedQuery1() {
+        if(q1.getText().equals("")){
+            JOptionPane.showMessageDialog(this, "Please enter data in ModelId field");
+        }
+        else {
+            String silhouette = q1.getText();
+            ResultSet rs = db.advancedQ1(q1.getText());
+            q1.setText("");
+
+            String count = "";
+            try {
+				while(rs.next()) {
+				    count = rs.getString("count");
+				}
+                JOptionPane.showMessageDialog(this, "There are " + count +
+                    " shoes that match the Silhouette \"" + silhouette + "\"");
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+
+            // while(rs.next()){
+            //     //data will be added until finished
+            //     String paymentType = rs.getString("PaymentType");
+            //     String receiptNumber = String.valueOf(rs.getInt("ReceiptNumber"));
+            //     String totalCost = String.valueOf(rs.getInt("TotalCost"));
+            //     String quantity = String.valueOf(rs.getInt("Quantity"));
+            //     String size = String.valueOf(rs.getInt("Size"));
+            //     String color = rs.getString("Color");
+            //     String customerId = String.valueOf(rs.getInt("CustomerId"));
+            //     String modelId = rs.getString("ModelId");
+
+            //     String tbData[] = {paymentType, receiptNumber, totalCost, quantity,
+            //         size, color, customerId, modelId};
+
+            //     //addstring array into jtable
+            //     tblModel.addRow(tbData);
+            // }
+        } 
+    }
+
+    // RUN ADVANCED QUERY 2
+    private void advancedQuery2() {
+        if(q2.getText().equals("")){
+            JOptionPane.showMessageDialog(this, "Please enter data in ModelId field");
+        }
+        else {
+            
+        } 
+    }
+
+    // RUN ADVANCED QUERY 3
+    private void advancedQuery3() {
+        if(q3.getText().equals("")){
+            JOptionPane.showMessageDialog(this, "Please enter data in ModelId field");
+        }
+        else {
+            
+        } 
+    }
+
+    // RUN ADVANCED QUERY 4
+    private void advancedQuery4() {
+        if(q4.getText().equals("")){
+            JOptionPane.showMessageDialog(this, "Please enter data in ModelId field");
+        }
+        else {
+            
+        } 
+    }
+
+    // RUN ADVANCED QUERY 5
+    private void advancedQuery5() {
+        if(q5.getText().equals("")){
+            JOptionPane.showMessageDialog(this, "Please enter data in ModelId field");
+        }
+        else {
+            
+        } 
+    }
+
+    // RUN ADVANCED QUERY 6
+    private void advancedQuery6() {
+        if(q6.getText().equals("")){
+            JOptionPane.showMessageDialog(this, "Please enter data in ModelId field");
+        }
+        else {
+            
+        } 
+    }
 }
