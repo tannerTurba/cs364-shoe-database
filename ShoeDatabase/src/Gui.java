@@ -999,11 +999,10 @@ public class GUI extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Updated Data Successfully");
             resetBrandTextBoxes();
         }
-    }            
-    
+    }          
+
+    //BRAND DELETE BUTTON
     private void brandDeleteActionPerformed(java.awt.event.ActionEvent evt) {                                            
-        //BRAND DELETE BUTTON
-        
         if(txtBrand.getText().equals("")){
             JOptionPane.showMessageDialog(this, "Please enter data in BrandId");
         }
@@ -1041,11 +1040,12 @@ public class GUI extends javax.swing.JFrame {
     //MODEL ADD BUTTON
     private void ModelAddActionPerformed(java.awt.event.ActionEvent evt) {                                         
         if(txtModel.getText().equals("") ||
+                txtStyle.getText().equals("") ||
                 txtPrice.getText().equals("") ||
                 txtSil.getText().equals("") ||
                 txtName2.getText().equals("") ||
                 txtColor.getText().equals("")){
-            JOptionPane.showMessageDialog(this, "Please enter data in all fields besides StyleId!");
+            JOptionPane.showMessageDialog(this, "Please enter data in all fields!");
         }
         else{            
             ShoeModel s = new ShoeModel(
@@ -1072,112 +1072,31 @@ public class GUI extends javax.swing.JFrame {
                 txtColor.getText().equals("")){
             JOptionPane.showMessageDialog(this, "Please enter data in all fields");
         }
-        else{            
-            try{
-            Connection con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/shoes?user=root&password=Sneakers123");
-            
-            String update = "UPDATE Brand SET ModelId = \"" + txtModel.getText() + "\","
-                    + "Price = \"" + Integer.valueOf(txtPrice.getText()) + "\","
-                    + "Silhouette = \"" + txtSil.getText() + "\","
-                    + "ModelName = \"" + txtName2.getText() + "\","
-                    + "Color = \"" + txtColor.getText() + "\""
-                    + "WHERE SytleId = \"" + txtStyle.getText() + "\"";
-            
-            PreparedStatement stmt = con.prepareStatement(update);
-            
-            stmt.executeUpdate();
-            
-            Statement st = con.createStatement();
-            String sql = "SELECT * FROM Model WHERE StyleId = \"" + txtStyle.getText()+ "\"";
-            ResultSet rs = st.executeQuery(sql);
-            while(rs.next()){
-                //data will be added until finished
-                String modelId = rs.getString("ModelId");
-                String styleId = rs.getString("StyleId");
-                String price = String.valueOf(rs.getInt("Price"));
-                String silhouette = rs.getString("Silhouette");
-                String modelName = rs.getString("ModelName");
-                String color = rs.getString("Color");
-
-                String tbData[] = {modelId, styleId, price,
-                    silhouette, modelName, color};
-                DefaultTableModel tblModel = (DefaultTableModel)Model.getModel();
-
-                //addstring array into jtable
-                tblModel.addRow(tbData);
-            }
-                JOptionPane.showMessageDialog(this, "Updated Data Successfully");
-
-                txtModel.setText("");
-                txtStyle.setText("");
-                txtPrice.setText("");
-                txtSil.setText("");
-                txtName2.setText("");
-                txtColor.setText("");
-                txtFirst.setText("");
-                txtLast.setText("");
-             
-            }
-            catch(Exception e){
-            System.out.println(e.getMessage());                
-            }
+        else{         
+            ShoeModel s = new ShoeModel(
+                txtModel.getText(),
+                txtStyle.getText(),
+                Integer.valueOf(txtPrice.getText()),
+                txtSil.getText(),
+                txtName2.getText(),
+                txtColor.getText()
+            );
+            db.updateShoeModel(s);
+            populateModelTable();
+            resetModelTextBoxes();
         }
-    }                                           
+    }
 
+    //MODEL DELETE BUTTON
     private void ModelDeleteActionPerformed(java.awt.event.ActionEvent evt) {                                            
-        //MODEL DELETE BUTTON
-        
         if(txtModel.getText().equals("")){
             JOptionPane.showMessageDialog(this, "Please enter data in ModelId field");
         }
-        else{            
-            try{
-                Connection con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/shoes?user=root&password=Sneakers123");
-
-                String delete = "DELETE FROM Model WHERE ModelId = \""  + txtModel.getText() + "\"";
-
-                PreparedStatement stmt = con.prepareStatement(delete);
-                stmt.executeUpdate();
-
-                DefaultTableModel tblModel = (DefaultTableModel)Customer.getModel();
-
-                tblModel.setRowCount(0);
-
-                Statement st = con.createStatement();
-                String sql = "SELECT * FROM Model";
-                ResultSet rs = st.executeQuery(sql);
-                while(rs.next()){
-                    //data will be added until finished
-                    String modelId = rs.getString("ModelId");
-                    String styleId = rs.getString("StyleId");
-                    String price = String.valueOf(rs.getInt("Price"));
-                    String silhouette = rs.getString("Silhouette");
-                    String modelName = rs.getString("ModelName");
-                    String color = rs.getString("Color");
-
-                    String tbData[] = {modelId, styleId, price,
-                        silhouette, modelName, color};
-
-                    //addstring array into jtable
-                    tblModel.addRow(tbData);
-                }
-                JOptionPane.showMessageDialog(this, "Deleted Data Successfully");
-
-                txtModel.setText("");
-                txtStyle.setText("");
-                txtPrice.setText("");
-                txtSil.setText("");
-                txtName2.setText("");
-                txtColor.setText("");
-                txtFirst.setText("");
-                txtLast.setText("");
-             
-            }
-            catch(Exception e){
-            System.out.println(e.getMessage());                
-            }
+        else {
+            db.deleteShoeModel(txtModel.getText());
+            populateModelTable();
+            resetModelTextBoxes();
         } 
-        
     }                                           
 
     /**

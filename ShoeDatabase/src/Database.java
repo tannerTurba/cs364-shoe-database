@@ -139,6 +139,29 @@ public class Database {
         }
     }
 
+    public void updateShoeModel(ShoeModel shoe) {
+        String update = "UPDATE Model SET StyleId = \"" + shoe.getStyleID() + "\","
+                    + "Price = \"" + shoe.getPrice() + "\","
+                    + "Silhouette = \"" + shoe.getSilhouette() + "\","
+                    + "ModelName = \"" + shoe.getName() + "\","
+                    + "Color = \"" + shoe.getColor() + "\""
+                    + "WHERE ModelId = \"" + shoe.getModelId() + "\"";
+        try {
+            dbExecuteUpdate(update);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void deleteShoeModel(String modelId) {
+        String delete = "DELETE FROM Model WHERE ModelId = \""  + modelId + "\"";
+        try {
+            dbExecuteUpdate(delete);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     public int insertBrand(Brand brand) {
         String sql = "INSERT INTO Brand(YearEstablished, AddressStreet, AddressCity, AddressState, AddressZip, AddressCountry, Name) VALUES (?, ?, ?, ?, ?, ?, ?)";
         int brandId = -1;
