@@ -4,8 +4,6 @@
  */
 
 import java.sql.*;
-import java.util.DoubleSummaryStatistics;
-
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -133,7 +131,7 @@ public class GUI extends javax.swing.JFrame {
         jButton1.setText("Show Customer");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                populateCustomerTable();
             }
         });
 
@@ -688,21 +686,12 @@ public class GUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>                        
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
-        // TODO add your handling code here:
-        
+    private void populateCustomerTable() { 
            try{
-            //open connection
-            //Class.forName("com.mysql.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/shoes?user=root&password=Sneakers123");
-            //username is root password is Sneakers123
-
-            
-            //Customer.setVisible(true);
-
-            Statement st = con.createStatement();
             String sql = "SELECT * FROM Customer";
-            ResultSet rs = st.executeQuery(sql);
+            ResultSet rs = db.executeSQL(sql);
+            DefaultTableModel tblModel = (DefaultTableModel)Customer.getModel();
+            tblModel.setRowCount(0);
             while(rs.next()){
                 //data will be added until finished
                 String customerId = String.valueOf(rs.getInt("CustomerId"));
@@ -717,14 +706,10 @@ public class GUI extends javax.swing.JFrame {
                 
                 String tbData[] = {customerId, phoneNumber, email, streetAddress, 
                         cityAddress, stateAddress, zipAddress, firstName, lastName};
-                DefaultTableModel tblModel = (DefaultTableModel)Customer.getModel();
                 
                 //addstring array into jtable
                 tblModel.addRow(tbData);
             }
-
-            //close connection
-            con.close();
         }
         catch(Exception e){
             System.out.println(e.getMessage());
@@ -732,18 +717,10 @@ public class GUI extends javax.swing.JFrame {
     }                                        
 
     private void populateBrandTable() {                                        
-        // TODO add your handling code here:
         //BRAND
          try{
-
-            //open connection
-            //Class.forName("com.mysql.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/shoes?user=root&password=Sneakers123");
-            //username is root password is Sneakers123
-            
-            Statement st = con.createStatement();
             String sql = "SELECT * FROM Brand";
-            ResultSet rs = st.executeQuery(sql);
+            ResultSet rs = db.executeSQL(sql);
             DefaultTableModel tblModel = (DefaultTableModel)Brand.getModel();
             tblModel.setRowCount(0);
             while(rs.next()){
@@ -764,9 +741,6 @@ public class GUI extends javax.swing.JFrame {
                 //addstring array into jtable
                 tblModel.addRow(tbData);
             }
-
-            //close connection
-            con.close();
         }
         catch(Exception e){
             System.out.println(e.getMessage());
@@ -902,69 +876,33 @@ public class GUI extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Please enter data in all fields besides CustomerId!");
         }
         else{
-//            String data[] = {txtCust.getText(), txtPhone.getText(), txtEmail.getText(),
-//                txtStreet.getText(), txtCity.getText(), txtState.getText(), txtZip.getText(),
-//                txtFirst.getText(), txtLast.getText()};
-            
-            try{
-            Connection con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/shoes?user=root&password=Sneakers123");
-            
-            String insert = "INSERT INTO Customer(PhoneNumber, Email, StreetAddress,"
-                    + " CityAddress, StateAddress, ZipAddress, FirstName, LastName) VALUES "
-                    + "(?, ?, ?, ?, ?, ?, ?, ?)";
-            
-            PreparedStatement stmt = con.prepareStatement(insert);
-            stmt.setString(1, txtPhone.getText());
-            stmt.setString(2, txtEmail.getText());
-            stmt.setString(3, txtStreet.getText());
-            stmt.setString(4, txtCity.getText());
-            stmt.setString(5, txtState.getText());
-            stmt.setInt(6, Integer.valueOf(txtZip.getText()));
-            stmt.setString(7, txtFirst.getText());
-            stmt.setString(8, txtLast.getText());
-            
-            stmt.execute();
-            
-            Statement st = con.createStatement();
-            String sql = "SELECT * FROM Customer WHERE Email = \"" + txtEmail.getText()+ "\"";
-            ResultSet rs = st.executeQuery(sql);
-            while(rs.next()){
-                //data will be added until finished
-                String customerId = String.valueOf(rs.getInt("CustomerId"));
-                String phoneNumber = rs.getString("PhoneNumber");
-                String email = rs.getString("Email");
-                String streetAddress = rs.getString("StreetAddress");
-                String cityAddress = rs.getString("CityAddress");
-                String stateAddress = String.valueOf(rs.getString("StateAddress"));
-                String zipAddress = String.valueOf(rs.getString("ZipAddress"));
-                String firstName = rs.getString("FirstName");
-                String lastName = rs.getString("LastName");
-                
-                String tbData[] = {customerId, phoneNumber, email, streetAddress, 
-                        cityAddress, stateAddress, zipAddress, firstName, lastName};
-                DefaultTableModel tblModel = (DefaultTableModel)Customer.getModel();
-                
-                //addstring array into jtable
-                tblModel.addRow(tbData);
-            }
-                JOptionPane.showMessageDialog(this, "Added Data Successfully");
-
-                txtPhone.setText("");
-                txtEmail.setText("");
-                txtStreet.setText("");
-                txtCity.setText("");
-                txtState.setText("");
-                txtZip.setText("");
-                txtFirst.setText("");
-                txtLast.setText("");
-             
-             
-            }
-            catch(Exception e){
-            System.out.println(e.getMessage());                
-            }
+            Customer c = new Customer(
+                txtEmail.getText(),
+                txtPhone.getText(),
+                txtStreet.getText(),
+                txtCity.getText(),
+                txtState.getText(),
+                Integer.valueOf(txtZip.getText()),
+                txtFirst.getText(),
+                txtLast.getText()
+            );
+            db.addCustomer(c);
+            populateCustomerTable();
+            JOptionPane.showMessageDialog(this, "Added Data Successfully");
+            clearCustomerTextBoxes();
         }
-    }                                         
+    }                              
+    
+    private void clearCustomerTextBoxes() {
+        txtPhone.setText("");
+        txtEmail.setText("");
+        txtStreet.setText("");
+        txtCity.setText("");
+        txtState.setText("");
+        txtZip.setText("");
+        txtFirst.setText("");
+        txtLast.setText("");
+    }
 
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {                                             
         //CUSTOMER DELETE BUTTON

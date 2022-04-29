@@ -233,6 +233,21 @@ public class Database {
         }
     }
 
+    public void addCustomer(Customer customer) {
+        String insert = "INSERT INTO Customer(PhoneNumber, Email, StreetAddress,"
+                    + " CityAddress, StateAddress, ZipAddress, FirstName, LastName) VALUES "
+                    + "(" + customer.getPhoneNumber() + ", " + customer.getEmail() + ", " +
+                    customer.getStreetAddress() + ", " + customer.getCityAddress() + ", " +
+                    customer.getStateAddress() + ", " + customer.getZipAddress() + ", " +
+                    customer.getFirstName() + ", " + customer.getLastName() + ")";
+        try {
+            PreparedStatement stmt = connection.prepareStatement(insert);
+            stmt.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     public int getBrandId(String brand) {
         try {
             String query = "SELECT BrandId FROM Brand WHERE Brand.Name = \'" + brand + "\'";
