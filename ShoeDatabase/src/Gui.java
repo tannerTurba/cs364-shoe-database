@@ -1316,12 +1316,13 @@ public class Gui extends javax.swing.JFrame {
     
     // RUN ADVANCED QUERY 1
     private void advancedQuery1() {
+        // Find the number of shoes that are classified by the same Silhouette
         if(q1.getText().equals("")){
             JOptionPane.showMessageDialog(this, "Please enter data in ModelId field");
         }
         else {
             String silhouette = q1.getText();
-            ResultSet rs = db.advancedQ1(q1.getText());
+            ResultSet rs = db.advancedQ1(silhouette);
             q1.setText("");
 
             String count = "";
@@ -1334,24 +1335,6 @@ public class Gui extends javax.swing.JFrame {
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-
-            // while(rs.next()){
-            //     //data will be added until finished
-            //     String paymentType = rs.getString("PaymentType");
-            //     String receiptNumber = String.valueOf(rs.getInt("ReceiptNumber"));
-            //     String totalCost = String.valueOf(rs.getInt("TotalCost"));
-            //     String quantity = String.valueOf(rs.getInt("Quantity"));
-            //     String size = String.valueOf(rs.getInt("Size"));
-            //     String color = rs.getString("Color");
-            //     String customerId = String.valueOf(rs.getInt("CustomerId"));
-            //     String modelId = rs.getString("ModelId");
-
-            //     String tbData[] = {paymentType, receiptNumber, totalCost, quantity,
-            //         size, color, customerId, modelId};
-
-            //     //addstring array into jtable
-            //     tblModel.addRow(tbData);
-            // }
         } 
     }
 
@@ -1367,11 +1350,25 @@ public class Gui extends javax.swing.JFrame {
 
     // RUN ADVANCED QUERY 3
     private void advancedQuery3() {
+        // Find the __ most purchasing customer
         if(q3.getText().equals("")){
             JOptionPane.showMessageDialog(this, "Please enter data in ModelId field");
         }
         else {
-            
+            int x = Integer.valueOf(q3.getText());
+            ResultSet rs = db.advancedQ3(x-1);
+            q1.setText("");
+
+            String name = "";
+            try {
+				while(rs.next()) {
+				    name += rs.getString("FirstName") + " ";
+                    name += rs.getString("LastName");
+				}
+                JOptionPane.showMessageDialog(this, name + " is the " + x + " most purchasing customer.");
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
         } 
     }
 
