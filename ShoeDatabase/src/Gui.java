@@ -92,9 +92,6 @@ public class Gui extends javax.swing.JFrame {
     private javax.swing.JTextField txtZip;
     private javax.swing.JTextField txtZip2;
     private javax.swing.JButton updateButton;
-    private Database db = new Database();
-    // End of variables declaration
-    // New query page
     private javax.swing.JTextField q1;
     private javax.swing.JTextField q2;
     private javax.swing.JTextField q3;
@@ -108,6 +105,8 @@ public class Gui extends javax.swing.JFrame {
     private javax.swing.JButton buttonq4;
     private javax.swing.JButton buttonq5;
     private javax.swing.JButton buttonq6;
+    private Database db = new Database();
+    // End of variables declaration
 
     /**
      * @param args the command line arguments
