@@ -4,6 +4,8 @@
  */
 
 import java.sql.*;
+import java.util.DoubleSummaryStatistics;
+
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -13,12 +15,20 @@ import javax.swing.table.DefaultTableModel;
  */
 public class GUI extends javax.swing.JFrame {
 
+    private Database db = new Database();
+
     /**
      * Creates new form GUI
      */
     public GUI() {
         initComponents();
-        
+
+        try {
+            db.connect();
+        } 
+        catch(SQLException e) {
+            e.printStackTrace();
+        }
         //set jpanel with Customer table in it to not visible
     }
 
@@ -298,7 +308,8 @@ public class GUI extends javax.swing.JFrame {
         jButton2.setText("Show Brand");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                // jButton2ActionPerformed(evt);
+                populateBrandTable();
             }
         });
 
@@ -683,8 +694,8 @@ public class GUI extends javax.swing.JFrame {
            try{
             //open connection
             //Class.forName("com.mysql.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/shoes?user=root&password=5628");
-            //username is root password is 5628
+            Connection con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/shoes?user=root&password=Sneakers123");
+            //username is root password is Sneakers123
 
             
             //Customer.setVisible(true);
@@ -720,18 +731,21 @@ public class GUI extends javax.swing.JFrame {
         }
     }                                        
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+    private void populateBrandTable() {                                        
         // TODO add your handling code here:
         //BRAND
          try{
+
             //open connection
             //Class.forName("com.mysql.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/shoes?user=root&password=5628");
+            Connection con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/shoes?user=root&password=Sneakers123");
             //username is root password is Sneakers123
             
             Statement st = con.createStatement();
             String sql = "SELECT * FROM Brand";
             ResultSet rs = st.executeQuery(sql);
+            DefaultTableModel tblModel = (DefaultTableModel)Brand.getModel();
+            tblModel.setRowCount(0);
             while(rs.next()){
                 //data will be added until finished
                 String brandId = String.valueOf(rs.getInt("BrandId"));
@@ -745,7 +759,7 @@ public class GUI extends javax.swing.JFrame {
 
                 String tbData[] = {brandId, yearEstablished, streetAddress,
                     cityAddress, stateAddress, zipAddress, countryAddress, name};
-                DefaultTableModel tblModel = (DefaultTableModel)Brand.getModel();
+                
 
                 //addstring array into jtable
                 tblModel.addRow(tbData);
@@ -765,7 +779,7 @@ public class GUI extends javax.swing.JFrame {
         try{
             //open connection
             //Class.forName("com.mysql.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/shoes?user=root&password=5628");
+            Connection con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/shoes?user=root&password=Sneakers123");
             //username is root password is Sneakers123
             
             Statement st = con.createStatement();
@@ -802,7 +816,7 @@ public class GUI extends javax.swing.JFrame {
         try{
             //open connection
             //Class.forName("com.mysql.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/shoes?user=root&password=5628");
+            Connection con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/shoes?user=root&password=Sneakers123");
             //username is root password is Sneakers123
             
             Statement st = con.createStatement();
@@ -836,7 +850,7 @@ public class GUI extends javax.swing.JFrame {
         try{
             //open connection
             //Class.forName("com.mysql.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/shoes?user=root&password=5628");
+            Connection con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/shoes?user=root&password=Sneakers123");
             //username is root password is Sneakers123
             
             Statement st = con.createStatement();
@@ -893,7 +907,7 @@ public class GUI extends javax.swing.JFrame {
 //                txtFirst.getText(), txtLast.getText()};
             
             try{
-            Connection con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/shoes?user=root&password=5628");
+            Connection con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/shoes?user=root&password=Sneakers123");
             
             String insert = "INSERT INTO Customer(PhoneNumber, Email, StreetAddress,"
                     + " CityAddress, StateAddress, ZipAddress, FirstName, LastName) VALUES "
@@ -964,7 +978,7 @@ public class GUI extends javax.swing.JFrame {
 //                txtFirst.getText(), txtLast.getText()};
             
             try{
-                Connection con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/shoes?user=root&password=5628");
+                Connection con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/shoes?user=root&password=Sneakers123");
 
                 String delete = "DELETE FROM Customer WHERE CustomerId = \""  + txtCust.getText() + "\"";
 
@@ -1032,7 +1046,7 @@ public class GUI extends javax.swing.JFrame {
         }
         else{            
             try{
-            Connection con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/shoes?user=root&password=5628");
+            Connection con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/shoes?user=root&password=Sneakers123");
             
             String update = "UPDATE Customer SET PhoneNumber = \"" + txtPhone.getText() + "\","
                     + "Email = \"" + txtEmail.getText() + "\","
@@ -1096,7 +1110,7 @@ public class GUI extends javax.swing.JFrame {
 
     private void BrandAddActionPerformed(java.awt.event.ActionEvent evt) {                                         
         //BRAND ADD BUTTON
-        
+        System.out.println("action performed");
         if(txtYear.getText().equals("") ||
                 txtStreet2.getText().equals("") ||
                 txtCity2.getText().equals("") ||
@@ -1108,137 +1122,62 @@ public class GUI extends javax.swing.JFrame {
         }
         else{
             try{
-            Connection con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/shoes?user=root&password=5628");
-            
-            String insert = "INSERT INTO Brand(YearEstablished, AddressStreet, "
-                    + "AddressCity, AddressState, AddressZip, AddressCountry, Name) "
-                    + "VALUES (?, ?, ?, ?, ?, ?)";
-            
-            
-            PreparedStatement stmt = con.prepareStatement(insert);
-            stmt.setInt(1, Integer.valueOf(txtYear.getText()));
-            stmt.setString(2, txtStreet2.getText());
-            stmt.setString(3, txtCity2.getText());
-            stmt.setString(4, txtState2.getText());
-            stmt.setInt(5, Integer.valueOf(txtZip2.getText()));
-            stmt.setString(6, txtCountry.getText());
-            stmt.setString(5, txtName.getText());
-            
-            stmt.execute();
-            
-            Statement st = con.createStatement();
-            String sql = "SELECT * FROM Brand WHERE Name = \"" + txtName.getText()+ "\"";
-            ResultSet rs = st.executeQuery(sql);
-            while(rs.next()){
-                //data will be added until finished
-                String brandId = String.valueOf(rs.getInt("BrandId"));
-                String yearEstablished = String.valueOf(rs.getInt("YearEstablished"));
-                String streetAddress = rs.getString("AddressStreet");
-                String cityAddress = rs.getString("AddressCity");
-                String stateAddress = rs.getString("AddressState");
-                String zipAddress = String.valueOf(rs.getString("AddressZip"));
-                String countryAddress = rs.getString("AddressCountry");
-                String name = rs.getString("Name");
-
-                String tbData[] = {brandId, yearEstablished, streetAddress,
-                    cityAddress, stateAddress, zipAddress, countryAddress, name};
-                DefaultTableModel tblModel = (DefaultTableModel)Brand.getModel();
-
-                //addstring array into jtable
-                tblModel.addRow(tbData);
-            }
-                JOptionPane.showMessageDialog(this, "Added Data Successfully");
-
-                txtYear.setText("");
-                txtStreet2.setText("");
-                txtCity2.setText("");
-                txtState2.setText("");
-                txtZip2.setText("");
-                txtCountry.setText("");
-                txtName.setText("");
-             
-             
+                Brand newBrand = new Brand(
+                                Integer.valueOf(txtYear.getText()),
+                                txtStreet2.getText(),
+                                txtCity2.getText(),
+                                txtState2.getText(),
+                                Integer.valueOf(txtZip2.getText()),
+                                txtCountry.getText(),
+                                txtName.getText()
+                );
+                System.out.println(newBrand);
+                db.addBrand(newBrand);
+                populateBrandTable();
+                resetBrandTextBoxes();
             }
             catch(Exception e){
             System.out.println(e.getMessage());                
             }
         }
-        
     }                                        
-
+    
     private void brandUpdateActionPerformed(java.awt.event.ActionEvent evt) {                                            
         //BRAND UPDATE BUTTON
         
-        if(txtCust.getText().equals("") || txtPhone.getText().equals("") ||
-                txtEmail.getText().equals("") ||
-                txtStreet.getText().equals("") ||
-                txtCity.getText().equals("") ||
-                txtState.getText().equals("") ||
-                txtZip.getText().equals("") ||
-                txtFirst.getText().equals("")||
-                txtLast.getText().equals("")){
+        if(txtYear.getText().equals("") ||
+                txtStreet2.getText().equals("") ||
+                txtCity2.getText().equals("") ||
+                txtState2.getText().equals("") ||
+                txtZip2.getText().equals("") ||
+                txtCountry.getText().equals("")||
+                txtName.getText().equals("")){
             JOptionPane.showMessageDialog(this, "Please enter data in all fields");
         }
         else{            
             try{
-            Connection con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/shoes?user=root&password=5628");
-            
-            String update = "UPDATE Brand SET "
-                    + "YearEstablished = \"" + Integer.valueOf(txtYear.getText()) + "\","
-                    + "AddressStreet = \"" + txtStreet2.getText() + "\","
-                    + "AddressCity = \"" + txtCity2.getText() + "\","
-                    + "AddressState = \"" + txtState2.getText() + "\","
-                    + "AddressZip = \"" + Integer.valueOf(txtZip2.getText()) + "\","
-                    + "CountryAddress = \"" + txtCountry.getText() + "\","
-                    + "Name = \"" + txtName.getText() + "\"" 
-                    + "WHERE BrandId = \"" + Integer.valueOf(txtBrand.getText()) + "\"";
-            
-            PreparedStatement stmt = con.prepareStatement(update);
-            
-            stmt.executeUpdate();
-            
-            Statement st = con.createStatement();
-            String sql = "SELECT * FROM Brand WHERE BrandId = \"" + txtBrand.getText()+ "\"";
-            ResultSet rs = st.executeQuery(sql);
-            while(rs.next()){
-                //data will be added until finished
-                String brandId = String.valueOf(rs.getInt("BrandId"));
-                String yearEstablished = String.valueOf(rs.getInt("YearEstablished"));
-                String streetAddress = rs.getString("AddressStreet");
-                String cityAddress = rs.getString("AddressCity");
-                String stateAddress = rs.getString("AddressState");
-                String zipAddress = String.valueOf(rs.getString("AddressZip"));
-                String countryAddress = rs.getString("AddressCountry");
-                String name = rs.getString("Name");
+                Brand brand = new Brand(
+                    Integer.valueOf(txtYear.getText()),
+                    txtStreet2.getText(),
+                    txtCity2.getText(),
+                    txtState2.getText(),
+                    Integer.valueOf(txtZip2.getText()),
+                    txtCountry.getText(),
+                    txtName.getText(),
+                    Integer.valueOf(txtBrand.getText())
+                );                
+                db.updateBrand(brand);
+                populateBrandTable();
 
-                String tbData[] = {brandId, yearEstablished, streetAddress,
-                    cityAddress, stateAddress, zipAddress, countryAddress, name};
-                DefaultTableModel tblModel = (DefaultTableModel)Brand.getModel();
-                
-                //addstring array into jtable
-                tblModel.addRow(tbData);
-            }
                 JOptionPane.showMessageDialog(this, "Updated Data Successfully");
-
-                txtBrand.setText("");
-                txtYear.setText("");
-                txtStreet2.setText("");
-                txtCity2.setText("");
-                txtState2.setText("");
-                txtZip2.setText("");
-                txtCountry.setText("");
-                txtName.setText("");
-             
-             
+                resetBrandTextBoxes();
             }
             catch(Exception e){
-            System.out.println(e.getMessage());                
+                System.out.println(e.getMessage());                
             }
         }
-        
-        
-    }                                           
-
+    }            
+    
     private void brandDeleteActionPerformed(java.awt.event.ActionEvent evt) {                                            
         //BRAND DELETE BUTTON
         
@@ -1247,55 +1186,28 @@ public class GUI extends javax.swing.JFrame {
         }
         else{            
             try{
-                Connection con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/shoes?user=root&password=5628");
-
-                String delete = "DELETE FROM Brand WHERE BrandId = \""  + txtBrand.getText() + "\"";
-
-                PreparedStatement stmt = con.prepareStatement(delete);
-                stmt.executeUpdate();
-
-                DefaultTableModel tblModel = (DefaultTableModel)Brand.getModel();
-
-                tblModel.setRowCount(0);
-                
-                Statement st = con.createStatement();
-                String sql = "SELECT * FROM Brand";
-                ResultSet rs = st.executeQuery(sql);
-                while(rs.next()){
-                    String brandId = String.valueOf(rs.getInt("BrandId"));
-                    String yearEstablished = String.valueOf(rs.getInt("YearEstablished"));
-                    String streetAddress = rs.getString("AddressStreet");
-                    String cityAddress = rs.getString("AddressCity");
-                    String stateAddress = String.valueOf(rs.getString("AddressState"));
-                    String zipAddress = String.valueOf(rs.getString("AddressZip"));
-                    String countryAddress = rs.getString("AddressCountry");
-                    String name = rs.getString("Name");
-
-                    String tbData[] = {brandId, yearEstablished, streetAddress,
-                        cityAddress, stateAddress, zipAddress, countryAddress, name};
-
-                    //addstring array into jtable
-                    tblModel.addRow(tbData);
-                }
+                db.deleteBrand(txtBrand.getText());
+                populateBrandTable();
                 
                 JOptionPane.showMessageDialog(this, "Deleted Data Successfully");
-
-                txtBrand.setText("");
-                txtYear.setText("");
-                txtStreet2.setText("");
-                txtCity2.setText("");
-                txtState2.setText("");
-                txtZip2.setText("");
-                txtCountry.setText("");
-                txtName.setText("");
-             
-             
+                resetBrandTextBoxes();
             }
             catch(Exception e){
             System.out.println(e.getMessage());                
             }
         } 
-    }                                           
+    }
+    
+    private void resetBrandTextBoxes() {
+        txtBrand.setText("");
+        txtYear.setText("");
+        txtStreet2.setText("");
+        txtCity2.setText("");
+        txtState2.setText("");
+        txtZip2.setText("");
+        txtCountry.setText("");
+        txtName.setText("");
+    }
 
     private void ModelAddActionPerformed(java.awt.event.ActionEvent evt) {                                         
         //MODEL ADD BUTTON
@@ -1309,7 +1221,7 @@ public class GUI extends javax.swing.JFrame {
         }
         else{            
             try{
-            Connection con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/shoes?user=root&password=5628");
+            Connection con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/shoes?user=root&password=Sneakers123");
             
             String insert = "INSERT INTO Model(ModelId, StyleId, Price,"
                     + " Silhouette, ModelName, Color) "
@@ -1375,7 +1287,7 @@ public class GUI extends javax.swing.JFrame {
         }
         else{            
             try{
-            Connection con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/shoes?user=root&password=5628");
+            Connection con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/shoes?user=root&password=Sneakers123");
             
             String update = "UPDATE Brand SET ModelId = \"" + txtModel.getText() + "\","
                     + "Price = \"" + Integer.valueOf(txtPrice.getText()) + "\","
@@ -1433,7 +1345,7 @@ public class GUI extends javax.swing.JFrame {
         }
         else{            
             try{
-                Connection con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/shoes?user=root&password=5628");
+                Connection con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/shoes?user=root&password=Sneakers123");
 
                 String delete = "DELETE FROM Model WHERE ModelId = \""  + txtModel.getText() + "\"";
 

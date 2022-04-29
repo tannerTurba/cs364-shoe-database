@@ -27,7 +27,7 @@ public class Customer {
     public Boolean isInDatabase(Database db) {
         try {
             String query = "SELECT count(*) AS count FROM Customer WHERE Customer.FirstName = \'" + firstName + "\' AND Customer.LastName = \'" + lastName + "\'";
-            ResultSet results = db.execute(query);
+            ResultSet results = db.executeSQL(query);
             results.next();
             int count = results.getInt("count");
             return count != 0;
@@ -43,7 +43,7 @@ public class Customer {
 
         try {
             String query = "SELECT * FROM Model ORDER BY RAND() LIMIT " + numberOfShoes;
-            ResultSet results = db.execute(query);
+            ResultSet results = db.executeSQL(query);
             
             while(results.next()) {
                 String modelId = results.getString("ModelId");

@@ -40,7 +40,7 @@ public class ShoeModel {
     public Boolean isInDatabase(Database db) {
         try {
             String query = "SELECT count(*) AS count FROM Model WHERE Model.ModelId = \'" + modelId + "\'";
-            ResultSet results = db.execute(query);
+            ResultSet results = db.executeSQL(query);
             results.next();
             int count = results.getInt("count");
             return count != 0;
