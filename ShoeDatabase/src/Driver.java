@@ -2,6 +2,12 @@ import java.io.*;
 import java.sql.*;
 import java.util.ArrayList;
 
+/**
+ *
+ * @author becsc
+ * @author tturba
+ * 
+ */
 
 public class Driver {
     Database db = new Database();

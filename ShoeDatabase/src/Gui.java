@@ -10,35 +10,139 @@ import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author becsc
+ * @author tturba
  */
-public class GUI extends javax.swing.JFrame {
 
+public class Gui extends javax.swing.JFrame {
+
+    // Variables declaration                    
+    private javax.swing.JTable Brand;
+    private javax.swing.JButton BrandAdd;
+    private javax.swing.JTable Buys;
+    private javax.swing.JTable Customer;
+    private javax.swing.JTable Makes;
+    private javax.swing.JTable Model;
+    private javax.swing.JButton ModelAdd;
+    private javax.swing.JButton ModelDelete;
+    private javax.swing.JButton ModelUpdate;
+    private javax.swing.JButton addButton;
+    private javax.swing.JButton brandDelete;
+    private javax.swing.JButton brandUpdate;
+    private javax.swing.JButton deleteButton;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTextField txtBrand;
+    private javax.swing.JTextField txtCity;
+    private javax.swing.JTextField txtCity2;
+    private javax.swing.JTextField txtColor;
+    private javax.swing.JTextField txtCountry;
+    private javax.swing.JTextField txtCust;
+    private javax.swing.JTextField txtEmail;
+    private javax.swing.JTextField txtFirst;
+    private javax.swing.JTextField txtLast;
+    private javax.swing.JTextField txtModel;
+    private javax.swing.JTextField txtName;
+    private javax.swing.JTextField txtName2;
+    private javax.swing.JTextField txtPhone;
+    private javax.swing.JTextField txtPrice;
+    private javax.swing.JTextField txtSil;
+    private javax.swing.JTextField txtState;
+    private javax.swing.JTextField txtState2;
+    private javax.swing.JTextField txtStreet;
+    private javax.swing.JTextField txtStreet2;
+    private javax.swing.JTextField txtStyle;
+    private javax.swing.JTextField txtYear;
+    private javax.swing.JTextField txtZip;
+    private javax.swing.JTextField txtZip2;
+    private javax.swing.JButton updateButton;
     private Database db = new Database();
+    // End of variables declaration
 
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(GUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(GUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(GUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(GUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new GUI().setVisible(true);
+            }
+        });
+    }
+    
     /**
      * Creates new form GUI
      */
     public GUI() {
         initComponents();
+        //set jpanel with Customer table in it to not visible
 
+        /* connect to database */
         try {
             db.connect();
         } 
         catch(SQLException e) {
             e.printStackTrace();
         }
-        //set jpanel with Customer table in it to not visible
     }
 
-    /**
-     * This method is called from within the constructor to initialize the form.
-     * WARNING: Do NOT modify this code. The content of this method is always
-     * regenerated by the Form Editor.
-     */
-    @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
+    @SuppressWarnings("unchecked")                      
     private void initComponents() {
-
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -599,7 +703,7 @@ public class GUI extends javax.swing.JFrame {
         jButton4.setText("Show Makes");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                populateMakesTable();
             }
         });
 
@@ -639,7 +743,7 @@ public class GUI extends javax.swing.JFrame {
         jButton5.setText("Show Buys");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                populateBuysTable();
             }
         });
 
@@ -684,8 +788,9 @@ public class GUI extends javax.swing.JFrame {
         );
 
         pack();
-    }// </editor-fold>                        
+    }                       
 
+    // CUSTOMER
     private void populateCustomerTable() { 
            try{
             String sql = "SELECT * FROM Customer";
@@ -714,10 +819,10 @@ public class GUI extends javax.swing.JFrame {
         catch(Exception e){
             System.out.println(e.getMessage());
         }
-    }                                        
+    }       
 
+    // BRAND
     private void populateBrandTable() {                                        
-        //BRAND
          try{
             String sql = "SELECT * FROM Brand";
             ResultSet rs = db.executeSQL(sql);
@@ -775,18 +880,13 @@ public class GUI extends javax.swing.JFrame {
         }
     }                                        
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {                                         
-        // TODO add your handling code here:
-        //MAKES
+    // MAKES
+    private void populateMakesTable() {
         try{
-            //open connection
-            //Class.forName("com.mysql.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/shoes?user=root&password=Sneakers123");
-            //username is root password is Sneakers123
-            
-            Statement st = con.createStatement();
             String sql = "SELECT * FROM Makes";
-            ResultSet rs = st.executeQuery(sql);
+            ResultSet rs = db.executeSQL(sql);
+            DefaultTableModel tblModel = (DefaultTableModel)Makes.getModel();
+            tblModel.setRowCount(0);
             while(rs.next()){
                 //data will be added until finished
                 String releaseDate = rs.getString("ReleaseDate");
@@ -794,33 +894,24 @@ public class GUI extends javax.swing.JFrame {
                 String modelId = rs.getString("ModelId");
 
                 String tbData[] = {releaseDate, brandId, modelId};
-                DefaultTableModel tblModel = (DefaultTableModel)Makes.getModel();
 
                 //addstring array into jtable
                 tblModel.addRow(tbData);
             }
-
-            //close connection
-            con.close();
         }
         catch(Exception e){
             System.out.println(e.getMessage());
         }
         
-    }                                        
+    }      
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {                                         
-        // TODO add your handling code here:
-        //BUYS
+    // BUYS 
+    private void populateBuysTable() {
         try{
-            //open connection
-            //Class.forName("com.mysql.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/shoes?user=root&password=Sneakers123");
-            //username is root password is Sneakers123
-            
-            Statement st = con.createStatement();
             String sql = "SELECT * FROM Buys";
-            ResultSet rs = st.executeQuery(sql);
+            ResultSet rs = db.executeSQL(sql);
+            DefaultTableModel tblModel = (DefaultTableModel)Buys.getModel();
+            tblModel.setRowCount(0);
             while(rs.next()){
                 //data will be added until finished
                 String paymentType = rs.getString("PaymentType");
@@ -834,14 +925,10 @@ public class GUI extends javax.swing.JFrame {
 
                 String tbData[] = {paymentType, receiptNumber, totalCost, quantity,
                     size, color, customerId, modelId};
-                DefaultTableModel tblModel = (DefaultTableModel)Buys.getModel();
 
                 //addstring array into jtable
                 tblModel.addRow(tbData);
             }
-
-            //close connection
-            con.close();
         }
         catch(Exception e){
             System.out.println(e.getMessage());
@@ -878,22 +965,9 @@ public class GUI extends javax.swing.JFrame {
             );
             db.addCustomer(c);
             populateCustomerTable();
-            JOptionPane.showMessageDialog(this, "Added Data Successfully");
             clearCustomerTextBoxes();
         }
     }                              
-    
-    private void clearCustomerTextBoxes() {
-        txtCust.setText("");
-        txtPhone.setText("");
-        txtEmail.setText("");
-        txtStreet.setText("");
-        txtCity.setText("");
-        txtState.setText("");
-        txtZip.setText("");
-        txtFirst.setText("");
-        txtLast.setText("");
-    }
 
     //CUSTOMER DELETE BUTTON
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {                                             
@@ -941,8 +1015,8 @@ public class GUI extends javax.swing.JFrame {
         // TODO add your handling code here:
     }                                         
 
+    //BRAND ADD BUTTON
     private void BrandAddActionPerformed(java.awt.event.ActionEvent evt) {                                         
-        //BRAND ADD BUTTON
         System.out.println("action performed");
         if(txtYear.getText().equals("") ||
                 txtStreet2.getText().equals("") ||
@@ -970,9 +1044,8 @@ public class GUI extends javax.swing.JFrame {
         }
     }                                        
     
+    //BRAND UPDATE BUTTON
     private void brandUpdateActionPerformed(java.awt.event.ActionEvent evt) {                                            
-        //BRAND UPDATE BUTTON
-        
         if(txtYear.getText().equals("") ||
                 txtStreet2.getText().equals("") ||
                 txtCity2.getText().equals("") ||
@@ -995,8 +1068,6 @@ public class GUI extends javax.swing.JFrame {
             );                
             db.updateBrand(brand);
             populateBrandTable();
-
-            JOptionPane.showMessageDialog(this, "Updated Data Successfully");
             resetBrandTextBoxes();
         }
     }          
@@ -1009,12 +1080,24 @@ public class GUI extends javax.swing.JFrame {
         else{           
             db.deleteBrand(txtBrand.getText());
             populateBrandTable();
-            
-            JOptionPane.showMessageDialog(this, "Deleted Data Successfully");
             resetBrandTextBoxes();
         } 
     }
+
+    // REMOVE THE TEXT FROM THE CUSTOMER TEXT BOXES
+    private void clearCustomerTextBoxes() {
+        txtCust.setText("");
+        txtPhone.setText("");
+        txtEmail.setText("");
+        txtStreet.setText("");
+        txtCity.setText("");
+        txtState.setText("");
+        txtZip.setText("");
+        txtFirst.setText("");
+        txtLast.setText("");
+    }
     
+    // REMOVE THE TEXT FROM THE BRAND TEXT BOXES
     private void resetBrandTextBoxes() {
         txtBrand.setText("");
         txtYear.setText("");
@@ -1026,6 +1109,7 @@ public class GUI extends javax.swing.JFrame {
         txtName.setText("");
     }
 
+    // REMOVE THE TEXT FROM THE MODEL TEXT BOXES
     private void resetModelTextBoxes() {
         txtModel.setText("");
         txtStyle.setText("");
@@ -1097,119 +1181,5 @@ public class GUI extends javax.swing.JFrame {
             populateModelTable();
             resetModelTextBoxes();
         } 
-    }                                           
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(GUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(GUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(GUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(GUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new GUI().setVisible(true);
-            }
-        });
-    }
-
-    // Variables declaration - do not modify                     
-    private javax.swing.JTable Brand;
-    private javax.swing.JButton BrandAdd;
-    private javax.swing.JTable Buys;
-    private javax.swing.JTable Customer;
-    private javax.swing.JTable Makes;
-    private javax.swing.JTable Model;
-    private javax.swing.JButton ModelAdd;
-    private javax.swing.JButton ModelDelete;
-    private javax.swing.JButton ModelUpdate;
-    private javax.swing.JButton addButton;
-    private javax.swing.JButton brandDelete;
-    private javax.swing.JButton brandUpdate;
-    private javax.swing.JButton deleteButton;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel21;
-    private javax.swing.JLabel jLabel22;
-    private javax.swing.JLabel jLabel23;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTextField txtBrand;
-    private javax.swing.JTextField txtCity;
-    private javax.swing.JTextField txtCity2;
-    private javax.swing.JTextField txtColor;
-    private javax.swing.JTextField txtCountry;
-    private javax.swing.JTextField txtCust;
-    private javax.swing.JTextField txtEmail;
-    private javax.swing.JTextField txtFirst;
-    private javax.swing.JTextField txtLast;
-    private javax.swing.JTextField txtModel;
-    private javax.swing.JTextField txtName;
-    private javax.swing.JTextField txtName2;
-    private javax.swing.JTextField txtPhone;
-    private javax.swing.JTextField txtPrice;
-    private javax.swing.JTextField txtSil;
-    private javax.swing.JTextField txtState;
-    private javax.swing.JTextField txtState2;
-    private javax.swing.JTextField txtStreet;
-    private javax.swing.JTextField txtStreet2;
-    private javax.swing.JTextField txtStyle;
-    private javax.swing.JTextField txtYear;
-    private javax.swing.JTextField txtZip;
-    private javax.swing.JTextField txtZip2;
-    private javax.swing.JButton updateButton;
-    // End of variables declaration                   
+    }                                                 
 }

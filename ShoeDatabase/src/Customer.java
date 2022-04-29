@@ -1,6 +1,13 @@
 import java.sql.*;
 import java.util.ArrayList;
 
+/**
+ *
+ * @author becsc
+ * @author tturba
+ * 
+ */
+
 public class Customer {
     private int customerId;
     private String phoneNumber;

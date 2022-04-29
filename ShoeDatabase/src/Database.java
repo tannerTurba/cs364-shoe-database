@@ -1,25 +1,11 @@
 import java.sql.*;
-import java.math.*;
 
-/*
- * load SQL driver(JDBE/OOBC)
- *  - add to build path
- * 
- * set up our database(script)
- *  - create database
- *  - create tables
- *  - populate with data(optional)
- * 
- * connect to database
- * 
- * insert/modify/delete data
- * 
- * query data
- * 
- * disconnect from database
+/**
+ *
+ * @author becsc
+ * @author tturba
  * 
  */
-
 
 public class Database {
     private Connection connection;

@@ -1,5 +1,12 @@
 import java.sql.*;
 
+/**
+ *
+ * @author becsc
+ * @author tturba
+ * 
+ */
+
 public class ShoeModel {
     private String modelId;
     private String styleID;

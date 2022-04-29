@@ -1,5 +1,12 @@
 import java.sql.*;
 
+/**
+ *
+ * @author becsc
+ * @author tturba
+ * 
+ */
+
 public class Brand {
     private int brandId;
     private int yearEstablished;
