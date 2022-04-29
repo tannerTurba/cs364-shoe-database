@@ -1,5 +1,12 @@
 import java.sql.*;
 
+/**
+ *
+ * @author becsc
+ * @author tturba
+ * 
+ */
+
 public class ShoeModel {
     private String modelId;
     private String styleID;
@@ -33,6 +40,15 @@ public class ShoeModel {
         this.thumbnail = thumbnail;
     }
 
+    public ShoeModel(String modelId, String styleID, long price, String silhouette, String name, String color) {
+        this.modelId = modelId;
+        this.styleID = styleID;
+        this.price = price;
+        this.silhouette = silhouette;
+        this.name = name;
+        this.color = color;
+    }
+
     public String toString() {
         return "modelId: " + modelId + "\nstyleId: " + styleID + "\nprice: " + price + "\nsilhouette: " + silhouette + "\nname: " + name + "\ncolor: " + color + "\nthumbnail: " + thumbnail + "\nbrand: " + brand + "\nrelease date: " + releaseDate;
     }
@@ -40,7 +56,7 @@ public class ShoeModel {
     public Boolean isInDatabase(Database db) {
         try {
             String query = "SELECT count(*) AS count FROM Model WHERE Model.ModelId = \'" + modelId + "\'";
-            ResultSet results = db.execute(query);
+            ResultSet results = db.executeSQL(query);
             results.next();
             int count = results.getInt("count");
             return count != 0;

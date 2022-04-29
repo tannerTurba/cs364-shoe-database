@@ -1,30 +1,16 @@
 import java.sql.*;
-import java.math.*;
 
-/*
- * load SQL driver(JDBE/OOBC)
- *  - add to build path
- * 
- * set up our database(script)
- *  - create database
- *  - create tables
- *  - populate with data(optional)
- * 
- * connect to database
- * 
- * insert/modify/delete data
- * 
- * query data
- * 
- * disconnect from database
+/**
+ *
+ * @author becsc
+ * @author tturba
  * 
  */
 
-
 public class Database {
     private Connection connection;
-    // private String url = "jdbc:mysql://localhost:3306/shoes?user=root&password=Sneakers123";
-    private String url = "jdbc:mysql://127.0.0.1:3306/shoes?user=root&password=Sneakers123";
+    private String url = "jdbc:mysql://localhost:3306/shoes?user=root&password=Sneakers123";
+    // private String url = "jdbc:mysql://127.0.0.1:3306/shoes?user=root&password=5628";
 
     
     public void connect() throws SQLException {
@@ -125,8 +111,46 @@ public class Database {
         }
     }
 
+    public void addShoeModel(ShoeModel shoe) {
+        String insert = "INSERT INTO Model(ModelId, StyleId, Price," +
+                    " Silhouette, ModelName, Color) " +
+                    "VALUES (" + shoe.getModelId() + ", " + shoe.getStyleID() +
+                    ", " + shoe.getPrice() + ", " + shoe.getSilhouette() + 
+                    ", " + shoe.getName() + ", " + shoe.getColor() + ")";
+        try {
+            PreparedStatement stmt = connection.prepareStatement(insert);
+            stmt.execute();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void updateShoeModel(ShoeModel shoe) {
+        String update = "UPDATE Model SET StyleId = \"" + shoe.getStyleID() + "\","
+                    + "Price = \"" + shoe.getPrice() + "\","
+                    + "Silhouette = \"" + shoe.getSilhouette() + "\","
+                    + "ModelName = \"" + shoe.getName() + "\","
+                    + "Color = \"" + shoe.getColor() + "\""
+                    + "WHERE ModelId = \"" + shoe.getModelId() + "\"";
+        try {
+            dbExecuteUpdate(update);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void deleteShoeModel(String modelId) {
+        String delete = "DELETE FROM Model WHERE ModelId = \""  + modelId + "\"";
+        try {
+            dbExecuteUpdate(delete);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     public int insertBrand(Brand brand) {
         String sql = "INSERT INTO Brand(YearEstablished, AddressStreet, AddressCity, AddressState, AddressZip, AddressCountry, Name) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        int brandId = -1;
         try {
             PreparedStatement stmt = connection.prepareStatement(sql);
             stmt.setInt(1, brand.getYearEstablished());
@@ -146,15 +170,69 @@ public class Database {
                 System.out.println("Inserted");
                 ResultSet keys = stmt.getGeneratedKeys();
                 keys.next();
-                return keys.getInt("BrandId");
+                brandId = keys.getInt("BrandId");
+                System.out.println(brandId);
             }
-            return -1;
 
         } catch(SQLException e) {
             System.out.println("Something went wrong.");
             e.printStackTrace();
         }
-        return -1;
+        return brandId;
+    }
+
+    public void deleteBrand(String brandId) {
+        String delete = "DELETE FROM Brand WHERE BrandId = \""  + brandId + "\"";
+        try {
+            dbExecuteUpdate(delete);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void updateBrand(Brand brand) {
+        String update = "UPDATE Brand SET "
+                    + "YearEstablished = \"" + brand.getYearEstablished() + "\","
+                    + "AddressStreet = \"" + brand.getStreetAddress() + "\","
+                    + "AddressCity = \"" + brand.getCityAddress() + "\","
+                    + "AddressState = \"" + brand.getStateAddress() + "\","
+                    + "AddressZip = \"" + brand.getZipAddress() + "\","
+                    + "AddressCountry = \"" + brand.getCountryAddress() + "\","
+                    + "Name = \"" + brand.getName() + "\"" 
+                    + "WHERE BrandId = \"" + brand.getBrandId() + "\"";
+            
+        try {
+            dbExecuteUpdate(update);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+ 
+    public int addBrand(Brand brand) {
+        String sql = "INSERT INTO Brand(YearEstablished, AddressStreet, AddressCity, AddressState, AddressZip, AddressCountry, Name) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        int brandId = -1;
+        try {
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            stmt.setInt(1, brand.getYearEstablished());
+            stmt.setString(2, brand.getStreetAddress());
+            stmt.setString(3, brand.getCityAddress());
+            stmt.setString(4, brand.getStateAddress());
+            stmt.setInt(5, brand.getZipAddress());
+            stmt.setString(6, brand.getCountryAddress());
+            stmt.setString(7, brand.getName());
+
+            if(stmt.execute()) {
+                System.out.println("Inserted");
+                ResultSet keys = stmt.getGeneratedKeys();
+                keys.next();
+                brandId = keys.getInt("BrandId");
+                System.out.println(brandId);
+            }
+        } catch(SQLException e) {
+            System.out.println("Something went wrong.");
+            e.printStackTrace();
+        }
+        return brandId;
     }
 
     public void insertCustomer(Customer customer) {
@@ -178,10 +256,52 @@ public class Database {
         }
     }
 
+    public void addCustomer(Customer customer) {
+        String insert = "INSERT INTO Customer(PhoneNumber, Email, StreetAddress,"
+                    + " CityAddress, StateAddress, ZipAddress, FirstName, LastName) VALUES "
+                    + "(" + customer.getPhoneNumber() + ", " + customer.getEmail() + ", " +
+                    customer.getStreetAddress() + ", " + customer.getCityAddress() + ", " +
+                    customer.getStateAddress() + ", " + customer.getZipAddress() + ", " +
+                    customer.getFirstName() + ", " + customer.getLastName() + ")";
+        try {
+            PreparedStatement stmt = connection.prepareStatement(insert);
+            stmt.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void deleteCustomer(String customerId) {
+        String delete = "DELETE FROM Customer WHERE CustomerId = \""  + customerId + "\"";
+        try {
+            dbExecuteUpdate(delete);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void updateCustomer(Customer customer) {
+        String update = "UPDATE Customer SET PhoneNumber = \"" + customer.getPhoneNumber() + "\","
+                + "Email = \"" + customer.getEmail() + "\","
+                + "StreetAddress = \"" + customer.getStreetAddress() + "\","
+                + "CityAddress = \"" + customer.getCityAddress() + "\","
+                + "StateAddress = \"" + customer.getStateAddress() + "\","
+                + "ZipAddress = \"" + customer.getZipAddress() + "\","
+                + "FirstName = \"" + customer.getFirstName() + "\","
+                + "LastName = \"" + customer.getLastName() + "\"" 
+                + "WHERE CustomerId = \"" + customer.getCustomerId() + "\"";
+            
+        try {
+            dbExecuteUpdate(update);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     public int getBrandId(String brand) {
         try {
             String query = "SELECT BrandId FROM Brand WHERE Brand.Name = \'" + brand + "\'";
-            ResultSet results = execute(query);
+            ResultSet results = executeSQL(query);
             results.next();
             return results.getInt("BrandId");
         } catch(SQLException e) {
@@ -194,7 +314,7 @@ public class Database {
     public int getCustomerId(Customer customer) {
         try {
             String query = "SELECT CustomerId FROM Customer WHERE Customer.FirstName = \'" + customer.getFirstName() + "\' AND Customer.LastName = \'" + customer.getLastName() + "\'";
-            ResultSet results = execute(query);
+            ResultSet results = executeSQL(query);
             results.next();
             return results.getInt("CustomerId");
         } catch(SQLException e) {
@@ -204,8 +324,13 @@ public class Database {
         }
     }
 
-    public ResultSet execute(String query) throws SQLException {
+    public ResultSet executeSQL(String query) throws SQLException {
         PreparedStatement stmt = connection.prepareStatement(query);
         return stmt.executeQuery();
+    }
+
+    public void dbExecuteUpdate(String query) throws SQLException {
+        PreparedStatement stmt = connection.prepareStatement(query);
+        stmt.executeUpdate();
     }
 }

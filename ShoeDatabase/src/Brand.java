@@ -1,5 +1,12 @@
 import java.sql.*;
 
+/**
+ *
+ * @author becsc
+ * @author tturba
+ * 
+ */
+
 public class Brand {
     private int brandId;
     private int yearEstablished;
@@ -20,10 +27,21 @@ public class Brand {
         this.name = name;
     }
 
+    public Brand(int yearEstablished, String streetAddress, String cityAddress, String stateAddress, int zipAddress, String countryAddress, String name, int brandId) {
+        this.yearEstablished = yearEstablished;
+        this.streetAddress = streetAddress;
+        this.cityAddress = cityAddress;
+        this.stateAddress = stateAddress;
+        this.zipAddress = zipAddress;
+        this.countryAddress = countryAddress;
+        this.name = name;
+        this.brandId = brandId;
+    }
+
     public Boolean isInDatabase(Database db) {
         try {
             String query = "SELECT count(*) AS count FROM Brand WHERE Brand.Name = \'" + name + "\'";
-            ResultSet results = db.execute(query);
+            ResultSet results = db.executeSQL(query);
             results.next();
             int count = results.getInt("count");
             return count != 0;
@@ -32,6 +50,10 @@ public class Brand {
             e.printStackTrace();
             return false;
         }
+    }
+
+    public String toString() {
+        return yearEstablished +'\n'+ streetAddress+'\n'+cityAddress+'\n'+stateAddress+'\n'+zipAddress+'\n'+countryAddress+'\n'+name;
     }
 
     /**

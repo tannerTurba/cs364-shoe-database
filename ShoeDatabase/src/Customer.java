@@ -1,6 +1,12 @@
 import java.sql.*;
 import java.util.ArrayList;
-import java.math.*;
+
+/**
+ *
+ * @author becsc
+ * @author tturba
+ * 
+ */
 
 public class Customer {
     private int customerId;
@@ -24,11 +30,23 @@ public class Customer {
         this.firstName = firstName;
         this.lastName = lastName;
     }
+    
+    public Customer(int customerId, String email, String phoneNumber, String streetAddress, String cityAddress, String stateAddress, int zipAddress, String firstName, String lastName) {
+        this.customerId = customerId;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+        this.streetAddress = streetAddress;
+        this.cityAddress = cityAddress;
+        this.stateAddress = stateAddress;
+        this.zipAddress = zipAddress;
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
 
     public Boolean isInDatabase(Database db) {
         try {
             String query = "SELECT count(*) AS count FROM Customer WHERE Customer.FirstName = \'" + firstName + "\' AND Customer.LastName = \'" + lastName + "\'";
-            ResultSet results = db.execute(query);
+            ResultSet results = db.executeSQL(query);
             results.next();
             int count = results.getInt("count");
             return count != 0;
@@ -44,7 +62,7 @@ public class Customer {
 
         try {
             String query = "SELECT * FROM Model ORDER BY RAND() LIMIT " + numberOfShoes;
-            ResultSet results = db.execute(query);
+            ResultSet results = db.executeSQL(query);
             
             while(results.next()) {
                 String modelId = results.getString("ModelId");
