@@ -257,6 +257,24 @@ public class Database {
         }
     }
 
+    public void updateCustomer(Customer customer) {
+        String update = "UPDATE Customer SET PhoneNumber = \"" + customer.getPhoneNumber() + "\","
+                + "Email = \"" + customer.getEmail() + "\","
+                + "StreetAddress = \"" + customer.getStreetAddress() + "\","
+                + "CityAddress = \"" + customer.getCityAddress() + "\","
+                + "StateAddress = \"" + customer.getStateAddress() + "\","
+                + "ZipAddress = \"" + customer.getZipAddress() + "\","
+                + "FirstName = \"" + customer.getFirstName() + "\","
+                + "LastName = \"" + customer.getLastName() + "\"" 
+                + "WHERE CustomerId = \"" + customer.getCustomerId() + "\"";
+            
+        try {
+            dbExecuteUpdate(update);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     public int getBrandId(String brand) {
         try {
             String query = "SELECT BrandId FROM Brand WHERE Brand.Name = \'" + brand + "\'";

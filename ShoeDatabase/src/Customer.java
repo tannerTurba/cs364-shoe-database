@@ -23,6 +23,18 @@ public class Customer {
         this.firstName = firstName;
         this.lastName = lastName;
     }
+    
+    public Customer(int customerId, String email, String phoneNumber, String streetAddress, String cityAddress, String stateAddress, int zipAddress, String firstName, String lastName) {
+        this.customerId = customerId;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+        this.streetAddress = streetAddress;
+        this.cityAddress = cityAddress;
+        this.stateAddress = stateAddress;
+        this.zipAddress = zipAddress;
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
 
     public Boolean isInDatabase(Database db) {
         try {

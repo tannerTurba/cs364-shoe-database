@@ -860,11 +860,10 @@ public class GUI extends javax.swing.JFrame {
 
     private void txtCustActionPerformed(java.awt.event.ActionEvent evt) {                                        
         // TODO add your handling code here:
-    }                                       
+    }        
 
+    //CUSTOMER ADD BUTTON
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {                                          
-        //CUSTOMER ADD BUTTON
-        
         if(txtPhone.getText().equals("") ||
                 txtEmail.getText().equals("") ||
                 txtStreet.getText().equals("") ||
@@ -894,6 +893,7 @@ public class GUI extends javax.swing.JFrame {
     }                              
     
     private void clearCustomerTextBoxes() {
+        txtCust.setText("");
         txtPhone.setText("");
         txtEmail.setText("");
         txtStreet.setText("");
@@ -904,8 +904,8 @@ public class GUI extends javax.swing.JFrame {
         txtLast.setText("");
     }
 
+    //CUSTOMER DELETE BUTTON
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {                                             
-        //CUSTOMER DELETE BUTTON
         if(txtCust.getText().equals("")){
             JOptionPane.showMessageDialog(this, "Please enter data in all fields");
         }
@@ -914,11 +914,10 @@ public class GUI extends javax.swing.JFrame {
             populateCustomerTable();
             clearCustomerTextBoxes();
         } 
-    }                                            
+    }       
 
+    //CUSTOMER UPDATE BUTTON
     private void updateButtonActionPerformed(java.awt.event.ActionEvent evt) {                                             
-        //CUSTOMER UPDATE BUTTON
-        
          if(txtCust.getText().equals("") || txtPhone.getText().equals("") ||
                 txtEmail.getText().equals("") ||
                 txtStreet.getText().equals("") ||
@@ -929,63 +928,21 @@ public class GUI extends javax.swing.JFrame {
                 txtLast.getText().equals("")){
             JOptionPane.showMessageDialog(this, "Please enter data in all fields");
         }
-        else{            
-            try{
-            Connection con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/shoes?user=root&password=Sneakers123");
-            
-            String update = "UPDATE Customer SET PhoneNumber = \"" + txtPhone.getText() + "\","
-                    + "Email = \"" + txtEmail.getText() + "\","
-                    + "StreetAddress = \"" + txtStreet.getText() + "\","
-                    + "CityAddress = \"" + txtCity.getText() + "\","
-                    + "StateAddress = \"" + txtState.getText() + "\","
-                    + "ZipAddress = \"" + Integer.valueOf(txtZip.getText()) + "\","
-                    + "FirstName = \"" + txtFirst.getText() + "\","
-                    + "LastName = \"" + txtLast.getText() + "\"" 
-                    + "WHERE CustomerId = \"" + Integer.valueOf(txtCust.getText()) + "\"";
-            
-            PreparedStatement stmt = con.prepareStatement(update);
-            
-            stmt.executeUpdate();
-            
-            Statement st = con.createStatement();
-            String sql = "SELECT * FROM Customer WHERE CustomerId = \"" + txtCust.getText()+ "\"";
-            ResultSet rs = st.executeQuery(sql);
-            while(rs.next()){
-                //data will be added until finished
-                String customerId = String.valueOf(rs.getInt("CustomerId"));
-                String phoneNumber = rs.getString("PhoneNumber");
-                String email = rs.getString("Email");
-                String streetAddress = rs.getString("StreetAddress");
-                String cityAddress = rs.getString("CityAddress");
-                String stateAddress = String.valueOf(rs.getString("StateAddress"));
-                String zipAddress = String.valueOf(rs.getString("ZipAddress"));
-                String firstName = rs.getString("FirstName");
-                String lastName = rs.getString("LastName");
-                
-                String tbData[] = {customerId, phoneNumber, email, streetAddress, 
-                        cityAddress, stateAddress, zipAddress, firstName, lastName};
-                DefaultTableModel tblModel = (DefaultTableModel)Customer.getModel();
-                
-                //addstring array into jtable
-                tblModel.addRow(tbData);
-            }
-                JOptionPane.showMessageDialog(this, "Updated Data Successfully");
-
-                txtCust.setText("");
-                txtPhone.setText("");
-                txtEmail.setText("");
-                txtStreet.setText("");
-                txtCity.setText("");
-                txtState.setText("");
-                txtZip.setText("");
-                txtFirst.setText("");
-                txtLast.setText("");
-             
-             
-            }
-            catch(Exception e){
-            System.out.println(e.getMessage());                
-            }
+        else{
+            Customer c = new Customer(
+                Integer.valueOf(txtCust.getText()),
+                txtEmail.getText(),
+                txtPhone.getText(),
+                txtStreet.getText(),
+                txtCity.getText(),
+                txtState.getText(),
+                Integer.valueOf(txtZip.getText()),
+                txtFirst.getText(),
+                txtLast.getText()
+            );
+            db.updateCustomer(c);
+            populateCustomerTable();
+            clearCustomerTextBoxes();
         }
     }                                            
 
