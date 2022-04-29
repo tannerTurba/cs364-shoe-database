@@ -906,66 +906,13 @@ public class GUI extends javax.swing.JFrame {
 
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {                                             
         //CUSTOMER DELETE BUTTON
-        
         if(txtCust.getText().equals("")){
             JOptionPane.showMessageDialog(this, "Please enter data in all fields");
         }
         else{
-//            String data[] = {txtCust.getText(), txtPhone.getText(), txtEmail.getText(),
-//                txtStreet.getText(), txtCity.getText(), txtState.getText(), txtZip.getText(),
-//                txtFirst.getText(), txtLast.getText()};
-            
-            try{
-                Connection con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/shoes?user=root&password=Sneakers123");
-
-                String delete = "DELETE FROM Customer WHERE CustomerId = \""  + txtCust.getText() + "\"";
-
-                PreparedStatement stmt = con.prepareStatement(delete);
-                stmt.executeUpdate();
-
-                DefaultTableModel tblModel = (DefaultTableModel)Customer.getModel();
-
-                tblModel.setRowCount(0);
-
-
-                Statement st = con.createStatement();
-                String sql = "SELECT * FROM Customer";
-                ResultSet rs = st.executeQuery(sql);
-                while(rs.next()){
-                    //data will be added until finished
-                    String customerId = String.valueOf(rs.getInt("CustomerId"));
-                    String phoneNumber = rs.getString("PhoneNumber");
-                    String email = rs.getString("Email");
-                    String streetAddress = rs.getString("StreetAddress");
-                    String cityAddress = rs.getString("CityAddress");
-                    String stateAddress = String.valueOf(rs.getString("StateAddress"));
-                    String zipAddress = String.valueOf(rs.getString("ZipAddress"));
-                    String firstName = rs.getString("FirstName");
-                    String lastName = rs.getString("LastName");
-
-                    String tbData[] = {customerId, phoneNumber, email, streetAddress, 
-                            cityAddress, stateAddress, zipAddress, firstName, lastName};
-
-                    //addstring array into jtable
-                    tblModel.addRow(tbData);
-                }
-                    JOptionPane.showMessageDialog(this, "Deleted Data Successfully");
-
-                    txtCust.setText("");
-                    txtPhone.setText("");
-                    txtEmail.setText("");
-                    txtStreet.setText("");
-                    txtCity.setText("");
-                    txtState.setText("");
-                    txtZip.setText("");
-                    txtFirst.setText("");
-                    txtLast.setText("");
-             
-             
-            }
-            catch(Exception e){
-            System.out.println(e.getMessage());                
-            }
+            db.deleteCustomer(txtCust.getText());
+            populateCustomerTable();
+            clearCustomerTextBoxes();
         } 
     }                                            
 

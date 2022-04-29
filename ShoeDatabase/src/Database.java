@@ -248,6 +248,15 @@ public class Database {
         }
     }
 
+    public void deleteCustomer(String customerId) {
+        String delete = "DELETE FROM Customer WHERE CustomerId = \""  + customerId + "\"";
+        try {
+            dbExecuteUpdate(delete);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     public int getBrandId(String brand) {
         try {
             String query = "SELECT BrandId FROM Brand WHERE Brand.Name = \'" + brand + "\'";
