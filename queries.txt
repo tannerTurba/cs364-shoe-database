@@ -1,12 +1,12 @@
 Group 1 - aggregate functions, LIKE, GROUP BY, ORDER BY, LIMIT.
-    List the names of brands who have 100 or more purchases of the shoe type ‘Sneaker.’
-    List the top 5 brands that have the highest revenue.
+    Count the Silhouettes of Nike that are of 'Air Force 1' style
+    Which brands have shoes that cost more than $200
 Group 2 - HAVING, OFFSET, outer join, joining four or more tables.
     Which brands does the third most purchasing customer own 
-    List the brand and name of the type of shoe that was the most purchased
+    List the top 5 brands that have the highest revenue.
 Group 3 - subqueries, IN, set operators, any additional functionality outside of what we discussed in class.
     Which shoes are more expensive than the least expensive shoe made by ‘Gucci’ 
-    Find the shoes that cost more than $1000
+    List the brand and name of the type of shoe that was the most purchased
 
 
 Count the Silhouettes of Nike that are of 'Air Force 1' style
@@ -17,6 +17,17 @@ SELECT count(Silhouette)
         ON Brand.BrandId = Makes.BrandId
         ON Makes.ModelId = Model.ModelId
     WHERE Brand.Name = 'Nike' AND Silhouette LIKE '%Air Force 1%'
+
+Which brands have shoes that cost more than $200
+Which brands have shoes that cost more than _____
+
+SELECT Brand.name
+    FROM Brand JOIN Makes JOIN Model 
+        ON Brand.BrandId = Makes.BrandId
+        AND Makes.ModelId = Model.ModelId
+	WHERE Model.Price > 200
+    GROUP BY Brand.Name   
+
 
 List the top 5 brands that have the highest revenue.
 Show the top _ brands with the highest revenue
@@ -71,16 +82,6 @@ SELECT Silhouette, Price
                     WHERE Brand = "Gucci"
                     ORDER BY Price ASC
                     LIMIT 1)
-
-Find the shoes that cost more than $1000
-Find the shoes that cost more than _______
-
-SELECT Brand.Name, Silhouette, Price
-    FROM Brand JOIN Makes JOIN Model JOIN Buys
-        ON Brand.BrandId = Makes.BrandId
-        AND Makes.ModelId = Model.ModelId
-        AND Model.ModelId = Buys.ModelId
-    WHERE Price > 999
 
     
 
