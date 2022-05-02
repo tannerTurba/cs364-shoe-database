@@ -79,7 +79,7 @@ SELECT Silhouette, Price
                         ON Brand.BrandId = Makes.BrandId
                         AND Makes.ModelId = Model.ModelId
                         AND Model.ModelId = Buys.ModelId
-                    WHERE Brand = "Gucci"
+                    WHERE Brand.Name = "Gucci"
                     ORDER BY Price ASC
                     LIMIT 1)
 
