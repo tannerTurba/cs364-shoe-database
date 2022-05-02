@@ -1317,7 +1317,7 @@ public class Gui extends javax.swing.JFrame {
     private void advancedQuery1() {
         // Find the number of shoes that are classified by the same Silhouette
         if(q1.getText().equals("")){
-            JOptionPane.showMessageDialog(this, "Please enter data in ModelId field");
+            JOptionPane.showMessageDialog(this, "Please enter data in Query1 field");
         }
         else {
             String silhouette = q1.getText();
@@ -1340,7 +1340,7 @@ public class Gui extends javax.swing.JFrame {
     // RUN ADVANCED QUERY 2
     private void advancedQuery2() {
         if(q2.getText().equals("")){
-            JOptionPane.showMessageDialog(this, "Please enter data in ModelId field");
+            JOptionPane.showMessageDialog(this, "Please enter data in Query2 field");
         }
         else {
             
@@ -1351,7 +1351,7 @@ public class Gui extends javax.swing.JFrame {
     private void advancedQuery3() {
         // Find the __ most purchasing customer
         if(q3.getText().equals("")){
-            JOptionPane.showMessageDialog(this, "Please enter data in ModelId field");
+            JOptionPane.showMessageDialog(this, "Please enter data in Query3 field");
         }
         else {
             int x = Integer.valueOf(q3.getText());
@@ -1374,7 +1374,7 @@ public class Gui extends javax.swing.JFrame {
     // RUN ADVANCED QUERY 4
     private void advancedQuery4() {
         if(q4.getText().equals("")){
-            JOptionPane.showMessageDialog(this, "Please enter data in ModelId field");
+            JOptionPane.showMessageDialog(this, "Please enter data in Query4 field");
         }
         else {
             
@@ -1384,7 +1384,7 @@ public class Gui extends javax.swing.JFrame {
     // RUN ADVANCED QUERY 5
     private void advancedQuery5() {
         if(q5.getText().equals("")){
-            JOptionPane.showMessageDialog(this, "Please enter data in ModelId field");
+            JOptionPane.showMessageDialog(this, "Please enter data in Query5 field");
         }
         else {
             
@@ -1394,7 +1394,7 @@ public class Gui extends javax.swing.JFrame {
     // RUN ADVANCED QUERY 6
     private void advancedQuery6() {
         if(q6.getText().equals("")){
-            JOptionPane.showMessageDialog(this, "Please enter data in ModelId field");
+            JOptionPane.showMessageDialog(this, "Please enter data in Query6 field");
         }
         else {
             
