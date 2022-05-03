@@ -1430,10 +1430,12 @@ public class Gui extends javax.swing.JFrame {
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
+            System.out.println(s);
             JTextArea textArea = new JTextArea(s);
-            JScrollPane scrollPane = new JScrollPane(textArea);  
+            textArea.setEditable(false);
             textArea.setLineWrap(true);  
             textArea.setWrapStyleWord(true); 
+            JScrollPane scrollPane = new JScrollPane(textArea, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);  
             textArea.setPreferredSize(new Dimension(500, 500));
             JOptionPane.showMessageDialog(this, scrollPane);
         } 

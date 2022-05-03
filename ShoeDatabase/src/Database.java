@@ -9,7 +9,7 @@ import java.sql.*;
 
 public class Database {
     private Connection connection;
-    private String url = "jdbc:mysql://localhost:3306/shoes?user=root&password=5628";
+    private String url = "jdbc:mysql://localhost:3306/shoes?user=root&password=Sneakers123";
     // private String url = "jdbc:mysql://127.0.0.1:3306/shoes?user=root&password=5628";
 
     
@@ -48,7 +48,6 @@ public class Database {
                             "AND Makes.ModelId = Model.ModelId" +
                         "WHERE Model.Price >" + s + 
                         "GROUP BY Brand.Name";
-        System.out.println(sql);
         try {
             result = runQuery(sql);
         } catch (SQLException e) {
@@ -67,7 +66,6 @@ public class Database {
                         "GROUP BY Buys.CustomerId " +
                         "ORDER BY sum(Buys.TotalCost) DESC " +                  
                             "LIMIT 1 OFFSET " + s + "";
-        System.out.println(sql);
         try {
             result = runQuery(sql);
         } catch (SQLException e) {
@@ -86,8 +84,6 @@ public class Database {
                         "GROUP BY Brand.Name " +
                         "ORDER BY sum(Buys.TotalCost) DESC " +
                         "LIMIT " + s;
-        
-        System.out.println(sql);
         try {
             result = runQuery(sql);
         } catch (SQLException e) {
@@ -111,7 +107,6 @@ public class Database {
                                         "WHERE Brand.Name = \'" + s + "\' " +
                                         "ORDER BY Price ASC " +
                                         "LIMIT 1)";
-        System.out.println(sql);
         try {
             result = runQuery(sql);
         } catch (SQLException e) {
@@ -129,7 +124,6 @@ public class Database {
                             "AND Buys.CustomerId = Customer.CustomerId " +
                         "WHERE StateAddress IN (" + s + ") " +
                         "GROUP BY Customer.CustomerId";
-        System.out.println(sql);
         try {
             result = runQuery(sql);
         } catch (SQLException e) {
