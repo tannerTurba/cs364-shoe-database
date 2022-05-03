@@ -1339,10 +1339,26 @@ public class Gui extends javax.swing.JFrame {
 
     // RUN ADVANCED QUERY 2
     private void advancedQuery2() {
+        //Which brands have shoes that cost more than _____
+
         if(q2.getText().equals("")){
             JOptionPane.showMessageDialog(this, "Please enter data in Query2 field");
         }
         else {
+            int x = Integer.valueOf(q2.getText());
+            ResultSet rs = db.advancedQ2(x);
+            q2.setText("");
+
+            String count = "";
+            try {
+				while(rs.next()) {
+				    count = rs.getString("count");
+				}
+                JOptionPane.showMessageDialog(this, "There are " + count +
+                    " shoes that cost more than " + x + "");
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
             
         } 
     }
@@ -1373,10 +1389,13 @@ public class Gui extends javax.swing.JFrame {
 
     // RUN ADVANCED QUERY 4
     private void advancedQuery4() {
+        //Show the top _ brands with the highest revenue
         if(q4.getText().equals("")){
             JOptionPane.showMessageDialog(this, "Please enter data in Query4 field");
         }
         else {
+            String brand = q4.getText();
+            
             
         } 
     }

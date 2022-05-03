@@ -40,8 +40,21 @@ public class Database {
         return result;
     }
 
-    public ResultSet advancedQ2(String s) {
-        return null;
+    public ResultSet advancedQ2(int s) {
+        ResultSet result = null;
+        String sql = "SELECT Brand.Name"+
+                        "FROM Brand JOIN Makes JOIN Model" +
+                            "ON Brand.BrandId = Makes.BrandId" +
+                            "AND Makes.ModelId = Model.ModelId" +
+                        "WHERE Model.Price >" + s + 
+                        "GROUP BY Brand.Name";
+        System.out.println(sql);
+        try {
+            result = runQuery(sql);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
     }
 
     public ResultSet advancedQ3(int s) {
