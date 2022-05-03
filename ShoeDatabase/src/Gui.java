@@ -1395,9 +1395,19 @@ public class Gui extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Please enter data in Query4 field");
         }
         else {
-            String brand = q4.getText();
+            int num = Integer.valueOf(q4.getText());
+            ResultSet rs = db.advancedQ4(num);
+            q4.setText("");
             
-            
+            String names = "The following are in the top "+ num + " brands with the highest revenue: \n";
+            try {
+				while(rs.next()) {
+				    names += rs.getString("Name") + "\n";
+				}
+                JOptionPane.showMessageDialog(this, names);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}           
         } 
     }
 
@@ -1431,11 +1441,33 @@ public class Gui extends javax.swing.JFrame {
 
     // RUN ADVANCED QUERY 6
     private void advancedQuery6() {
+        //Count the number of customers in the states _____
         if(q6.getText().equals("")){
             JOptionPane.showMessageDialog(this, "Please enter data in Query6 field");
         }
         else {
-            
+            String states = q6.getText();
+
+            String[] arr = states.split(", ");
+
+            String listed = "";
+            for(String s : arr){
+                listed += "\'" + s + "\'";
+            }
+            ResultSet rs = db.advancedQ6(listed);
+            q6.setText("");
+
+            String count = "";
+            try {
+				while(rs.next()) {
+				    count = rs.getString("count");
+				}
+                JOptionPane.showMessageDialog(this, "There are " + count +
+                    " customers in the states " +  states);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+
         } 
     }
 }

@@ -30,7 +30,6 @@ SELECT Brand.name
     GROUP BY Brand.Name   
 
 
-<<<<<<< HEAD
 Who is the third most purchasing customer
 Who is the _ most purchasing customer
 
@@ -42,8 +41,6 @@ SELECT Customer.FirstName
     GROUP BY Buys.CustomerId
     ORDER BY sum(Buys.TotalCost) DESC                  
     LIMIT 1 OFFSET 2
-=======
->>>>>>> 8b721169bb4808e20b974cdafe8a98a597e0fe62
 
 List the top 5 brands that have the highest revenue.
 Show the top _ brands with the highest revenue
@@ -56,27 +53,7 @@ SELECT Brand.Name
     GROUP BY Brand.BrandId
     ORDER BY sum(Buys.TotalCost) DESC
     LIMIT 5
-
-<<<<<<< HEAD
-QUERY 5
-Count the number of customers in the following states: IL or OH
-SELECT count(Customer.CustomerId) 
-=======
-
-
-Who is the third most purchasing customer
-Who is the _ most purchasing customer
-
-SELECT Customer.Name 
->>>>>>> 8b721169bb4808e20b974cdafe8a98a597e0fe62
-    FROM Makes JOIN Model JOIN Buys JOIN Customer
-        ON Makes.ModelId = Model.ModelId
-        AND Model.ModelId = Buys.ModelId
-        AND Buys.CustomerId = Customer.CustomerId
-    WHERE StateAddress IN ('IL', 'OH')
-    GROUP BY Customer.CustomerId
-
-    
+   
 Which shoes are more expensive than the least expensive shoe made by ‘Gucci’ 
 Which shoes are more expensive than the least expensive shoe made by _______
 
@@ -93,6 +70,17 @@ SELECT Silhouette, Price
                     WHERE Brand.Name = "Gucci"
                     ORDER BY Price ASC
                     LIMIT 1)
+
+Count the number of customers in the following states: IL or OH
+Count the number of customers in the states _____
+
+SELECT count(Customer.CustomerId) 
+    FROM Makes JOIN Model JOIN Buys JOIN Customer
+        ON Makes.ModelId = Model.ModelId
+        AND Model.ModelId = Buys.ModelId
+        AND Buys.CustomerId = Customer.CustomerId
+    WHERE StateAddress IN ('IL', 'OH')
+    GROUP BY Customer.CustomerId
 
     
 
