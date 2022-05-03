@@ -74,13 +74,14 @@ SELECT Silhouette, Price
 Count the number of customers in the following states: IL or OH
 Count the number of customers in the states _____
 
-SELECT count(Customer.CustomerId) 
+SELECT Customer.FirstName AS Name
     FROM Makes JOIN Model JOIN Buys JOIN Customer
         ON Makes.ModelId = Model.ModelId
         AND Model.ModelId = Buys.ModelId
         AND Buys.CustomerId = Customer.CustomerId
-    WHERE StateAddress IN ('IL', 'OH')
+	WHERE StateAddress IN ('IL', 'OH')
     GROUP BY Customer.CustomerId
+
 
     
 

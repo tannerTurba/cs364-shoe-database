@@ -1458,10 +1458,10 @@ public class Gui extends javax.swing.JFrame {
             ResultSet rs = db.advancedQ6(listed);
             q6.setText("");
 
-            String count = "";
+            int count = 0;
             try {
 				while(rs.next()) {
-				    count = rs.getString("count");
+				    count ++;
 				}
                 JOptionPane.showMessageDialog(this, "There are " + count +
                     " customers in the states " +  states);
