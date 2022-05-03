@@ -1452,8 +1452,9 @@ public class Gui extends javax.swing.JFrame {
 
             String listed = "";
             for(String s : arr){
-                listed += "\'" + s + "\'";
+                listed += "\'" + s + "\',";
             }
+            listed = listed.substring(0, listed.length()-1);
             ResultSet rs = db.advancedQ6(listed);
             q6.setText("");
 

@@ -45,12 +45,12 @@ SELECT Customer.FirstName
 List the top 5 brands that have the highest revenue.
 Show the top _ brands with the highest revenue
 
-SELECT Brand.Name 
+SELECT Brand.Name
     FROM Brand JOIN Makes JOIN Model JOIN Buys
         ON Brand.BrandId = Makes.BrandId
         AND Makes.ModelId = Model.ModelId
         AND Model.ModelId = Buys.ModelId
-    GROUP BY Brand.BrandId
+    GROUP BY Brand.Name
     ORDER BY sum(Buys.TotalCost) DESC
     LIMIT 5
    
