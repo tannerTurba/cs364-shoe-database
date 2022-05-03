@@ -17,6 +17,8 @@ SELECT count(Silhouette)
         ON Makes.ModelId = Model.ModelId
     WHERE Brand.Name = 'Nike' AND Silhouette LIKE '%Air Force 1%'
 
+
+
 Which brands have shoes that cost more than $200
 Which brands have shoes that cost more than _____
 
@@ -28,6 +30,7 @@ SELECT Brand.name
     GROUP BY Brand.Name   
 
 
+<<<<<<< HEAD
 Who is the third most purchasing customer
 Who is the _ most purchasing customer
 
@@ -39,6 +42,8 @@ SELECT Customer.FirstName
     GROUP BY Buys.CustomerId
     ORDER BY sum(Buys.TotalCost) DESC                  
     LIMIT 1 OFFSET 2
+=======
+>>>>>>> 8b721169bb4808e20b974cdafe8a98a597e0fe62
 
 List the top 5 brands that have the highest revenue.
 Show the top _ brands with the highest revenue
@@ -52,9 +57,18 @@ SELECT Brand.Name
     ORDER BY sum(Buys.TotalCost) DESC
     LIMIT 5
 
+<<<<<<< HEAD
 QUERY 5
 Count the number of customers in the following states: IL or OH
 SELECT count(Customer.CustomerId) 
+=======
+
+
+Who is the third most purchasing customer
+Who is the _ most purchasing customer
+
+SELECT Customer.Name 
+>>>>>>> 8b721169bb4808e20b974cdafe8a98a597e0fe62
     FROM Makes JOIN Model JOIN Buys JOIN Customer
         ON Makes.ModelId = Model.ModelId
         AND Model.ModelId = Buys.ModelId
