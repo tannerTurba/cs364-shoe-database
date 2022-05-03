@@ -1,7 +1,5 @@
 import java.sql.*;
 
-import com.mysql.cj.protocol.Resultset;
-
 /**
  *
  * @author becsc
@@ -42,14 +40,15 @@ public class Database {
         return result;
     }
 
-    public ResultSet advancedQ2(String s) {
+    public ResultSet advancedQ2(int s) {
         ResultSet result = null;
-        String sql = "SELECT Brand.name " +
-                        "FROM Brand JOIN Makes JOIN Model " + 
-                            "ON Brand.BrandId = Makes.BrandId " +
-                            "AND Makes.ModelId = Model.ModelId " +
-                        "WHERE Model.Price > " + s + 
-                        " GROUP BY Brand.Name";
+        String sql = "SELECT Brand.Name"+
+                        "FROM Brand JOIN Makes JOIN Model" +
+                            "ON Brand.BrandId = Makes.BrandId" +
+                            "AND Makes.ModelId = Model.ModelId" +
+                        "WHERE Model.Price >" + s + 
+                        "GROUP BY Brand.Name";
+        System.out.println(sql);
         try {
             result = runQuery(sql);
         } catch (SQLException e) {
@@ -68,6 +67,7 @@ public class Database {
                         "GROUP BY Buys.CustomerId " +
                         "ORDER BY sum(Buys.TotalCost) DESC " +                  
                             "LIMIT 1 OFFSET " + s + "";
+        System.out.println(sql);
         try {
             result = runQuery(sql);
         } catch (SQLException e) {
@@ -77,21 +77,7 @@ public class Database {
     }
 
     public ResultSet advancedQ4(String s) {
-        ResultSet result = null;
-        String sql = "SELECT Brand.Name " + 
-                        "FROM Brand JOIN Makes JOIN Model JOIN Buys " +
-                            "ON Brand.BrandId = Makes.BrandId " +
-                            "AND Makes.ModelId = Model.ModelId " +
-                            "AND Model.ModelId = Buys.ModelId " +
-                        "GROUP BY Brand.BrandId " +
-                        "ORDER BY sum(Buys.TotalCost) DESC " +
-                        "LIMIT " + s;
-        try {
-            result = runQuery(sql);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return result;
+        return null;
     }
 
     public ResultSet advancedQ5(String s) {

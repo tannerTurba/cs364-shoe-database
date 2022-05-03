@@ -1340,24 +1340,27 @@ public class Gui extends javax.swing.JFrame {
 
     // RUN ADVANCED QUERY 2
     private void advancedQuery2() {
-        // Which brands have shoes that cost more than ____
+        //Which brands have shoes that cost more than _____
+
         if(q2.getText().equals("")){
             JOptionPane.showMessageDialog(this, "Please enter data in Query2 field");
         }
         else {
-            String x = q2.getText();
-            ResultSet rs = db.advancedQ2(q2.getText());
+            int x = Integer.valueOf(q2.getText());
+            ResultSet rs = db.advancedQ2(x);
             q2.setText("");
 
-            String s = "The following brands have shoes that cost more than " + x + ":\n";
+            String count = "";
             try {
 				while(rs.next()) {
-				    s += " - " + rs.getString("name") + "\n";
+				    count = rs.getString("count");
 				}
-                JOptionPane.showMessageDialog(this, s);
+                JOptionPane.showMessageDialog(this, "There are " + count +
+                    " shoes that cost more than " + x + "");
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
+            
         } 
     }
 
@@ -1370,7 +1373,7 @@ public class Gui extends javax.swing.JFrame {
         else {
             int x = Integer.valueOf(q3.getText());
             ResultSet rs = db.advancedQ3(x-1);
-            q3.setText("");
+            q1.setText("");
 
             String name = "";
             try {
@@ -1387,24 +1390,14 @@ public class Gui extends javax.swing.JFrame {
 
     // RUN ADVANCED QUERY 4
     private void advancedQuery4() {
-        // Show the top ____ brands with the highest revenue.
+        //Show the top _ brands with the highest revenue
         if(q4.getText().equals("")){
             JOptionPane.showMessageDialog(this, "Please enter data in Query4 field");
         }
         else {
-            String x = q4.getText();
-            ResultSet rs = db.advancedQ4(x);
-            q4.setText("");
+            String brand = q4.getText();
             
-            String s = "The following " + x + " brands have the highest revenue: \n";
-            try {
-				while(rs.next()) {
-				    s += " - " + rs.getString("name") + "\n";
-				}
-                JOptionPane.showMessageDialog(this, s);
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
+            
         } 
     }
 
