@@ -18,6 +18,8 @@ SELECT count(Silhouette)
         ON Makes.ModelId = Model.ModelId
     WHERE Brand.Name = 'Nike' AND Silhouette LIKE '%Air Force 1%'
 
+
+
 Which brands have shoes that cost more than $200
 Which brands have shoes that cost more than _____
 
@@ -27,6 +29,7 @@ SELECT Brand.name
         AND Makes.ModelId = Model.ModelId
 	WHERE Model.Price > 200
     GROUP BY Brand.Name   
+
 
 
 List the top 5 brands that have the highest revenue.
@@ -40,6 +43,8 @@ SELECT Brand.Name
     GROUP BY Brand.BrandId
     ORDER BY sum(Buys.TotalCost) DESC
     LIMIT 5
+
+
 
 Who is the third most purchasing customer
 Who is the _ most purchasing customer
