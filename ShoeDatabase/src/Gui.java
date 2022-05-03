@@ -797,6 +797,8 @@ public class Gui extends javax.swing.JFrame {
                 .addContainerGap(63, Short.MAX_VALUE))
         );
 
+        jTabbedPane1.addTab("Buys", jPanel5);
+
         buttonq1.setText("Query 1");
         buttonq1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
