@@ -3,8 +3,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 
+import java.awt.Dimension;
 import java.sql.*;
-import javax.swing.JOptionPane;
+import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -1409,11 +1410,29 @@ public class Gui extends javax.swing.JFrame {
 
     // RUN ADVANCED QUERY 5
     private void advancedQuery5() {
+        // Which shoes are more expensive than the least expensive shoe made by _______
         if(q5.getText().equals("")){
             JOptionPane.showMessageDialog(this, "Please enter data in Query5 field");
         }
         else {
+            String x = q5.getText();
+            ResultSet rs = db.advancedQ5(x);
+            q5.setText("");
             
+            String s = "The following shoes are more expensive than the least expensive " + x + " shoe: \n";
+            try {
+				while(rs.next()) {
+				    s += "$" + rs.getString("Price") + " - " + rs.getString("Silhouette") + "\n";
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+            JTextArea textArea = new JTextArea(s);
+            JScrollPane scrollPane = new JScrollPane(textArea);  
+            textArea.setLineWrap(true);  
+            textArea.setWrapStyleWord(true); 
+            textArea.setPreferredSize(new Dimension(500, 500));
+            JOptionPane.showMessageDialog(this, scrollPane);
         } 
     }
 

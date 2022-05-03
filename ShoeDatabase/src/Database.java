@@ -95,7 +95,27 @@ public class Database {
     }
 
     public ResultSet advancedQ5(String s) {
-        return null;
+        ResultSet result = null;
+        String sql = "SELECT Silhouette, Price " + 
+                        "FROM Brand JOIN Makes JOIN Model JOIN Buys " +
+                            "ON Brand.BrandId = Makes.BrandId " +
+                            "AND Makes.ModelId = Model.ModelId " +
+                            "AND Model.ModelId = Buys.ModelId " +
+                        "WHERE Price > (SELECT Price " +
+                                        "FROM Brand JOIN Makes JOIN Model JOIN Buys " +
+                                            "ON Brand.BrandId = Makes.BrandId " +
+                                            "AND Makes.ModelId = Model.ModelId " +
+                                            "AND Model.ModelId = Buys.ModelId " +
+                                        "WHERE Brand.Name = \'" + s + "\' " +
+                                        "ORDER BY Price ASC " +
+                                        "LIMIT 1)";
+        System.out.println(sql);
+        try {
+            result = runQuery(sql);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
     }
 
     public ResultSet advancedQ6(String s) {
