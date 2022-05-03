@@ -117,7 +117,7 @@ public class Database {
 
     public ResultSet advancedQ6(String s) {
         ResultSet result = null;
-        String sql = "SELECT count(Customer.CustomerId) AS count " + 
+        String sql = "SELECT Customer.FirstName AS Name " + 
                         "FROM Makes JOIN Model JOIN Buys JOIN Customer " +
                             "ON Makes.ModelId = Model.ModelId " +
                             "AND Model.ModelId = Buys.ModelId " +
