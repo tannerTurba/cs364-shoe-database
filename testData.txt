@@ -1,0 +1,40 @@
+Add Customer:
+(715)470-4060
+schoch8323@uwlax.edu
+702 11th St N
+La Crosse
+WI
+54601
+Becca
+schoch8323
+
+Update Customer:
+(715)470-4060
+schoch8323@uwlax.edu
+1425 State St
+La Crosse
+WI
+54601
+Becca
+schoch8323
+
+Delete Customer:
+CustomerId
+
+Query1: Find the number of shoes that are classified by the same Silhouette
+Air Force 1
+
+Query2: Which brands have shoes that cost more than _____
+200
+
+Query3: Who is the _ most purchasing customer
+3
+
+Query4: Show the top _ brands with the highest revenue
+5
+
+Query5: Which shoes are more expensive than the least expensive shoe made by _______
+Gucci
+
+Query6: Count the number of customers in the states _____
+IL, OH
