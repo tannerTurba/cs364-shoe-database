@@ -220,9 +220,10 @@ public class Database {
     public void addShoeModel(ShoeModel shoe) {
         String insert = "INSERT INTO Model(ModelId, StyleId, Price," +
                     " Silhouette, ModelName, Color) " +
-                    "VALUES (" + shoe.getModelId() + ", " + shoe.getStyleID() +
-                    ", " + shoe.getPrice() + ", " + shoe.getSilhouette() + 
-                    ", " + shoe.getName() + ", " + shoe.getColor() + ")";
+                    "VALUES (\'" + shoe.getModelId() + "\', \'" + shoe.getStyleID() +
+                    "\', " + shoe.getPrice() + ", \'" + shoe.getSilhouette() + 
+                    "\', \'" + shoe.getName() + "\', \'" + shoe.getColor() + "\')";
+        System.out.print(insert);
         try {
             PreparedStatement stmt = connection.prepareStatement(insert);
             stmt.execute();
@@ -365,10 +366,10 @@ public class Database {
     public void addCustomer(Customer customer) {
         String insert = "INSERT INTO Customer(PhoneNumber, Email, StreetAddress,"
                     + " CityAddress, StateAddress, ZipAddress, FirstName, LastName) VALUES "
-                    + "(" + customer.getPhoneNumber() + ", " + customer.getEmail() + ", " +
-                    customer.getStreetAddress() + ", " + customer.getCityAddress() + ", " +
-                    customer.getStateAddress() + ", " + customer.getZipAddress() + ", " +
-                    customer.getFirstName() + ", " + customer.getLastName() + ")";
+                    + "( \'" + customer.getPhoneNumber() + "\', \'" + customer.getEmail() + "\', \'" +
+                    customer.getStreetAddress() + "\', \'" + customer.getCityAddress() + "\', \'" +
+                    customer.getStateAddress() + "\', " + customer.getZipAddress() + ", \'" +
+                    customer.getFirstName() + "\', \'" + customer.getLastName() + "\')";
 
 
         System.out.println(insert);
