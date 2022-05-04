@@ -42,12 +42,12 @@ public class Database {
 
     public ResultSet advancedQ2(int s) {
         ResultSet result = null;
-        String sql = "SELECT Brand.Name"+
-                        "FROM Brand JOIN Makes JOIN Model" +
-                            "ON Brand.BrandId = Makes.BrandId" +
-                            "AND Makes.ModelId = Model.ModelId" +
-                        "WHERE Model.Price >" + s + 
-                        "GROUP BY Brand.Name";
+        String sql = "SELECT Brand.Name "+
+                        "FROM Brand JOIN Makes JOIN Model " +
+                            "ON Brand.BrandId = Makes.BrandId " +
+                            "AND Makes.ModelId = Model.ModelId " +
+                        "WHERE Model.Price > " + s + 
+                        " GROUP BY Brand.Name ";
         try {
             result = runQuery(sql);
         } catch (SQLException e) {
@@ -369,9 +369,13 @@ public class Database {
                     customer.getStreetAddress() + ", " + customer.getCityAddress() + ", " +
                     customer.getStateAddress() + ", " + customer.getZipAddress() + ", " +
                     customer.getFirstName() + ", " + customer.getLastName() + ")";
+
+
+        System.out.println(insert);
         try {
-            PreparedStatement stmt = connection.prepareStatement(insert);
-            stmt.execute();
+            // PreparedStatement stmt = connection.prepareStatement(insert);
+            // stmt.execute();
+            dbExecuteUpdate(insert);
         } catch (SQLException e) {
             e.printStackTrace();
         }

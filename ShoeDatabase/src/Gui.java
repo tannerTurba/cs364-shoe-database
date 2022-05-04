@@ -1352,13 +1352,12 @@ public class Gui extends javax.swing.JFrame {
             ResultSet rs = db.advancedQ2(x);
             q2.setText("");
 
-            String count = "";
+            String count = "The following brands have shoes that cost more than " + x + ": \n"; 
             try {
 				while(rs.next()) {
-				    count = rs.getString("count");
+				    count += rs.getString("name") + '\n';
 				}
-                JOptionPane.showMessageDialog(this, "There are " + count +
-                    " shoes that cost more than " + x + "");
+                JOptionPane.showMessageDialog(this, count);
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -1375,7 +1374,7 @@ public class Gui extends javax.swing.JFrame {
         else {
             int x = Integer.valueOf(q3.getText());
             ResultSet rs = db.advancedQ3(x-1);
-            q1.setText("");
+            q3.setText("");
 
             String name = "";
             try {
